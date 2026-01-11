@@ -1,0 +1,30 @@
+project:
+  type: website
+  render:
+    - index.qmd
+    - hm_datasciende.ipynb
+  output-dir: _site
+
+website:
+  title: "Tennis Match Analytics"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Overview
+      - href: hm_datasciende.ipynb
+        text: Full Report
+
+format:
+  html:
+    theme: default
+    toc: true
+    toc-title: "Table of contents"
+    toc-location: right
+    toc-depth: 2
+    number-sections: false
+    code-copy: true
+    code-fold: true
+    css: styles.css
+
+execute:
+  freeze: auto
