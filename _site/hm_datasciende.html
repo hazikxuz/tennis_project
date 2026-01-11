@@ -2515,7 +2515,7 @@ visualize distributions by surface, and summarize the key observations.</p>
 <section id="class-balance-check" class="level4">
 <h4 class="anchored" data-anchor-id="class-balance-check">Class balance check</h4>
 <p>We verify the proportion of winners and losers in the modeling tables. Because each match contributes a winner and a loser row, the target is expected to be close to 50/50. This means accuracy remains interpretable, but ROC-AUC and log loss are still preferred for ranking and calibration.</p>
-<div id="8c17857c" class="cell" data-execution_count="125">
+<div id="8c17857c" class="cell" data-execution_count="135">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_class_balance(df, label):</span>
@@ -2531,18 +2531,8 @@ visualize distributions by surface, and summarize the key observations.</p>
 <span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    display(balance[[<span class="st">"label"</span>, <span class="st">"count"</span>, <span class="st">"pct"</span>]].set_index(<span class="st">"label"</span>))</span>
 <span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> [<span class="st">"0 (loss)"</span>, <span class="st">"1 (win)"</span>, <span class="st">"missing"</span>] <span class="cf">if</span> x <span class="kw">in</span> balance[<span class="st">"label"</span>].tolist()]</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">3</span>))</span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    sns.barplot(data<span class="op">=</span>balance, x<span class="op">=</span><span class="st">"label"</span>, y<span class="op">=</span><span class="st">"count"</span>, order<span class="op">=</span>order, color<span class="op">=</span><span class="st">"#4c72b0"</span>)</span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> class balance"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Class"</span>)</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Count"</span>)</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_pre, <span class="st">"Pre-match"</span>)</span>
-<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_diag, <span class="st">"Diagnostic"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_pre, <span class="st">"Pre-match"</span>)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_diag, <span class="st">"Diagnostic"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -2579,13 +2569,6 @@ visualize distributions by surface, and summarize the key observations.</p>
 </div>
 <div class="cell-output cell-output-display">
 <div>
-<figure class="figure">
-<p><img src="hm_datasciende_files/figure-html/cell-24-output-2.png" class="img-fluid figure-img"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
 
 
 <table class="dataframe caption-top table table-sm table-striped small" data-border="1">
@@ -2615,13 +2598,6 @@ visualize distributions by surface, and summarize the key observations.</p>
 </tbody>
 </table>
 
-</div>
-</div>
-<div class="cell-output cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="hm_datasciende_files/figure-html/cell-24-output-4.png" class="img-fluid figure-img"></p>
-</figure>
 </div>
 </div>
 </div>
