@@ -159,6 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#matches-per-court-surface" id="toc-matches-per-court-surface" class="nav-link" data-scroll-target="#matches-per-court-surface">Matches per Court Surface</a></li>
   <li><a href="#average-match-duration-by-surface" id="toc-average-match-duration-by-surface" class="nav-link" data-scroll-target="#average-match-duration-by-surface">Average Match Duration by Surface</a></li>
   <li><a href="#serving-metrics-across-surfaces" id="toc-serving-metrics-across-surfaces" class="nav-link" data-scroll-target="#serving-metrics-across-surfaces">Serving Metrics Across Surfaces</a></li>
+  <li><a href="#additional-exploratory-views" id="toc-additional-exploratory-views" class="nav-link" data-scroll-target="#additional-exploratory-views">Additional Exploratory Views</a></li>
   <li><a href="#machine-learning-problem-formulation-and-evaluation-plan" id="toc-machine-learning-problem-formulation-and-evaluation-plan" class="nav-link" data-scroll-target="#machine-learning-problem-formulation-and-evaluation-plan">Machine Learning: Problem Formulation and Evaluation Plan</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   </ul>
@@ -548,7 +549,7 @@ The analysis follows the <strong>CRISP-DM methodology</strong>: business underst
 <h2 class="anchored" data-anchor-id="loading-and-combining-all-match-data">Loading and Combining All Match Data</h2>
 <p>In this section, we load all available CSV files (ATP &amp; WTA matches from 2015–2023), inspect their structure, and combine them into a single unified DataFrame.<br>
 This merged dataset will be the basis for all subsequent analysis.</p>
-<div id="92b1f8a2-d583-4271-8ac1-96521cbf410c" class="cell" data-execution_count="62">
+<div id="92b1f8a2-d583-4271-8ac1-96521cbf410c" class="cell" data-execution_count="103">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -563,14 +564,14 @@ This merged dataset will be the basis for all subsequent analysis.</p>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>os.chdir(<span class="st">"D:/DATA SCIENCE NEW/tennis_matches"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="dd887f0e-d92e-448b-9ce7-f0923ac6cc88" class="cell" data-execution_count="63">
+<div id="dd887f0e-d92e-448b-9ce7-f0923ac6cc88" class="cell" data-execution_count="104">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Find all CSV match files in the directory</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> glob.glob(<span class="st">"*.csv"</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>files</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="63">
+<div class="cell-output cell-output-display" data-execution_count="104">
 <pre><code>['atp_matches_2015.csv',
  'atp_matches_2016.csv',
  'atp_matches_2017.csv',
@@ -591,7 +592,7 @@ This merged dataset will be the basis for all subsequent analysis.</p>
  'wta_matches_2023.csv']</code></pre>
 </div>
 </div>
-<div id="24d478ea-4e5f-45a6-bcc8-3484fab66ef1" class="cell" data-execution_count="64">
+<div id="24d478ea-4e5f-45a6-bcc8-3484fab66ef1" class="cell" data-execution_count="105">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>dfs <span class="op">=</span> []</span>
@@ -606,7 +607,7 @@ This merged dataset will be the basis for all subsequent analysis.</p>
 <span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>matches.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="64">
+<div class="cell-output cell-output-display" data-execution_count="105">
 <div>
 
 
@@ -938,7 +939,7 @@ This merged dataset will be the basis for all subsequent analysis.</p>
 </div>
 </div>
 </div>
-<div id="166e9bb3-ac06-4861-a37b-d8cdf823fc22" class="cell" data-execution_count="65">
+<div id="166e9bb3-ac06-4861-a37b-d8cdf823fc22" class="cell" data-execution_count="106">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>matches.info()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -1010,14 +1011,14 @@ memory usage: 17.8+ MB</code></pre>
 - presence of missing values<br>
 - whether numeric columns were imported correctly<br>
 - consistency of key fields (e.g., best_of ∈ {3,5})</p>
-<div id="161bb23f-a6ae-4eb6-8c62-93aeb72ff5e5" class="cell" data-execution_count="66">
+<div id="161bb23f-a6ae-4eb6-8c62-93aeb72ff5e5" class="cell" data-execution_count="107">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>matches[<span class="st">"tourney_date"</span>] <span class="op">=</span> pd.to_datetime(matches[<span class="st">"tourney_date"</span>], <span class="bu">format</span><span class="op">=</span><span class="st">"%Y%m</span><span class="sc">%d</span><span class="st">"</span>, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>matches[<span class="st">"tourney_date"</span>].head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="107">
 <pre><code>0   2015-01-04
 1   2015-01-04
 2   2015-01-04
@@ -1026,13 +1027,13 @@ memory usage: 17.8+ MB</code></pre>
 Name: tourney_date, dtype: datetime64[ns]</code></pre>
 </div>
 </div>
-<div id="d47608c4-d72e-4191-af58-608b11bbe319" class="cell" data-execution_count="67">
+<div id="d47608c4-d72e-4191-af58-608b11bbe319" class="cell" data-execution_count="108">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>missing_percent <span class="op">=</span> matches.isna().mean().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>missing_percent.head(<span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div class="cell-output cell-output-display" data-execution_count="108">
 <pre><code>winner_entry    0.861631
 loser_entry     0.782567
 loser_seed      0.758412
@@ -1056,12 +1057,12 @@ l_bpSaved       0.049959
 dtype: float64</code></pre>
 </div>
 </div>
-<div id="79ad2578-c1e4-4867-932a-2ea97010353a" class="cell" data-execution_count="68">
+<div id="79ad2578-c1e4-4867-932a-2ea97010353a" class="cell" data-execution_count="109">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>matches.describe(include<span class="op">=</span><span class="st">'all'</span>).T</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="68">
+<div class="cell-output cell-output-display" data-execution_count="109">
 <div>
 
 
@@ -1807,13 +1808,13 @@ dtype: float64</code></pre>
 <p>In this section, we examine how many matches were played on each type of surface<br>
 (<em>Hard, Clay, Grass, Carpet</em>).<br>
 Court surface is one of the most important contextual variables in tennis, as it affects play style, rally length, serve advantage, and match duration.</p>
-<div id="1d9029eb-188a-4192-92d1-2e3ca0b447bf" class="cell" data-execution_count="71">
+<div id="1d9029eb-188a-4192-92d1-2e3ca0b447bf" class="cell" data-execution_count="110">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>surface_counts <span class="op">=</span> matches[<span class="st">"surface"</span>].value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>surface_counts</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="71">
+<div class="cell-output cell-output-display" data-execution_count="110">
 <pre><code>surface
 Hard      28082
 Clay      13526
@@ -1822,13 +1823,13 @@ Carpet       19
 Name: count, dtype: int64</code></pre>
 </div>
 </div>
-<div id="15e7e998-dd17-4bd7-900f-69619f10a5c1" class="cell" data-execution_count="72">
+<div id="15e7e998-dd17-4bd7-900f-69619f10a5c1" class="cell" data-execution_count="111">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>surface_percent <span class="op">=</span> (surface_counts <span class="op">/</span> <span class="bu">len</span>(matches) <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>surface_percent</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="72">
+<div class="cell-output cell-output-display" data-execution_count="111">
 <pre><code>surface
 Hard      60.19
 Clay      28.99
@@ -1837,7 +1838,7 @@ Carpet     0.04
 Name: count, dtype: float64</code></pre>
 </div>
 </div>
-<div id="3459333b-e750-4cdb-bf00-af87cd819086" class="cell" data-execution_count="73">
+<div id="3459333b-e750-4cdb-bf00-af87cd819086" class="cell" data-execution_count="112">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
@@ -1894,7 +1895,7 @@ Tennis surfaces differ in speed and rally length, which directly affects match d
 <li><strong>Carpet</strong> – fast indoor surface, almost extinct on the main tour and represented by only a few matches in the dataset</li>
 </ul>
 <p>We compute the average match duration (in minutes) and then compare the surfaces.</p>
-<div id="b9abb2f9-1c20-45ff-b80c-2d17fcd81c4c" class="cell" data-execution_count="74">
+<div id="b9abb2f9-1c20-45ff-b80c-2d17fcd81c4c" class="cell" data-execution_count="113">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>duration_by_surface <span class="op">=</span> (</span>
@@ -1907,7 +1908,7 @@ Tennis surfaces differ in speed and rally length, which directly affects match d
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>duration_by_surface</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="74">
+<div class="cell-output cell-output-display" data-execution_count="113">
 <pre><code>surface
 Carpet    122.00
 Grass     107.18
@@ -1916,7 +1917,7 @@ Hard      104.67
 Name: minutes, dtype: float64</code></pre>
 </div>
 </div>
-<div id="39e329aa-61aa-4e76-8bcc-8400ef5d3986" class="cell" data-execution_count="75">
+<div id="39e329aa-61aa-4e76-8bcc-8400ef5d3986" class="cell" data-execution_count="114">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>,<span class="dv">5</span>))</span>
@@ -1989,7 +1990,7 @@ which allows us to compare serving performance across surfaces consistently.</p>
 </ol>
 <p>In the following cells, we compute all relevant serving metrics, build a player-level dataset,<br>
 visualize distributions by surface, and summarize the key observations.</p>
-<div id="37a94997-0a6c-4f20-8136-f5d19aff5c3c" class="cell" data-execution_count="76">
+<div id="37a94997-0a6c-4f20-8136-f5d19aff5c3c" class="cell" data-execution_count="115">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create serving metrics at match level</span></span>
@@ -2018,7 +2019,7 @@ visualize distributions by surface, and summarize the key observations.</p>
 <span id="cb20-24"><a href="#cb20-24" aria-hidden="true" tabindex="-1"></a>matches[<span class="st">"l_bp_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_bpSaved"</span>], matches[<span class="st">"l_bpFaced"</span>]).fillna(<span class="fl">1.0</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="8c6d72ed-636d-4269-a72a-082b22cd5206" class="cell" data-execution_count="77">
+<div id="8c6d72ed-636d-4269-a72a-082b22cd5206" class="cell" data-execution_count="116">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Build player-level dataset for surface comparisons</span></span>
@@ -2033,13 +2034,13 @@ visualize distributions by surface, and summarize the key observations.</p>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
-<div id="7c4c90ed-375d-4937-9728-7f75b4a238ad" class="cell" data-execution_count="78">
+<div id="7c4c90ed-375d-4937-9728-7f75b4a238ad" class="cell" data-execution_count="117">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>surface_summary <span class="op">=</span> df_surface.groupby(<span class="st">"surface"</span>).mean().<span class="bu">round</span>(<span class="dv">3</span>)</span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>surface_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="78">
+<div class="cell-output cell-output-display" data-execution_count="117">
 <div>
 
 
@@ -2101,7 +2102,7 @@ visualize distributions by surface, and summarize the key observations.</p>
 </div>
 </div>
 </div>
-<div id="ecea46dd-d60d-47fa-851b-6b19401ab7c7" class="cell" data-execution_count="79">
+<div id="ecea46dd-d60d-47fa-851b-6b19401ab7c7" class="cell" data-execution_count="118">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>df_surface <span class="op">=</span> df_surface.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
@@ -2132,12 +2133,12 @@ visualize distributions by surface, and summarize the key observations.</p>
 </div>
 </div>
 </div>
-<div id="8aa296b0-a7b9-4577-9b58-acdcc83f46ad" class="cell" data-execution_count="80">
+<div id="8aa296b0-a7b9-4577-9b58-acdcc83f46ad" class="cell" data-execution_count="119">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>surface_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="80">
+<div class="cell-output cell-output-display" data-execution_count="119">
 <div>
 
 
@@ -2214,32 +2215,111 @@ visualize distributions by surface, and summarize the key observations.</p>
 </ul>
 </section>
 </section>
+<section id="additional-exploratory-views" class="level2">
+<h2 class="anchored" data-anchor-id="additional-exploratory-views">Additional Exploratory Views</h2>
+<p>This section adds a couple of quick checks to understand how the dataset is distributed over time and how large ranking gaps typically are.</p>
+<section id="matches-per-season" class="level3">
+<h3 class="anchored" data-anchor-id="matches-per-season">Matches per season</h3>
+<div id="cc762300" class="cell" data-execution_count="120">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Matches per season</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"season"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"tourney_date"</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        matches[<span class="st">"tourney_date"</span>] <span class="op">=</span> pd.to_datetime(matches[<span class="st">"tourney_date"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        matches[<span class="st">"season"</span>] <span class="op">=</span> matches[<span class="st">"tourney_date"</span>].dt.year</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>season_counts <span class="op">=</span> (</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    matches.dropna(subset<span class="op">=</span>[<span class="st">"season"</span>])</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    .groupby(<span class="st">"season"</span>)</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    .size()</span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    .sort_index()</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>season_counts</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>sns.lineplot(x<span class="op">=</span>season_counts.index, y<span class="op">=</span>season_counts.values, marker<span class="op">=</span><span class="st">"o"</span>)</span>
+<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="st">"Matches per Season"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Season"</span>)</span>
+<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Match count"</span>)</span>
+<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a>plt.xticks(season_counts.index)</span>
+<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hm_datasciende_files/figure-html/cell-19-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="rank-gap-distribution" class="level3">
+<h3 class="anchored" data-anchor-id="rank-gap-distribution">Rank gap distribution</h3>
+<div id="5b792455" class="cell" data-execution_count="121">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Rank gap distribution (winner vs loser)</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"winner_rank"</span> <span class="kw">in</span> matches.columns <span class="kw">and</span> <span class="st">"loser_rank"</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    rank_gap <span class="op">=</span> (matches[<span class="st">"winner_rank"</span>] <span class="op">-</span> matches[<span class="st">"loser_rank"</span>]).<span class="bu">abs</span>()</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>    rank_gap <span class="op">=</span> pd.to_numeric(rank_gap, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>    rank_gap <span class="op">=</span> rank_gap.replace([np.inf, <span class="op">-</span>np.inf], np.nan).dropna()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    rank_gap_clip <span class="op">=</span> rank_gap.clip(upper<span class="op">=</span><span class="dv">200</span>)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">4</span>))</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    sns.histplot(rank_gap_clip, bins<span class="op">=</span><span class="dv">30</span>, color<span class="op">=</span><span class="st">"#4c72b0"</span>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">"Rank Gap Distribution (absolute, capped at 200)"</span>, fontsize<span class="op">=</span><span class="dv">13</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Absolute rank gap"</span>)</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Matches"</span>)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Rank columns not available for this dataset."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hm_datasciende_files/figure-html/cell-20-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
 <section id="machine-learning-problem-formulation-and-evaluation-plan" class="level2">
 <h2 class="anchored" data-anchor-id="machine-learning-problem-formulation-and-evaluation-plan">Machine Learning: Problem Formulation and Evaluation Plan</h2>
 <p>We extend the analysis with a predictive task that estimates the probability of winning a match.</p>
-<section id="target-and-prediction-setting--target-won-1-winner-0-loser-at-match-level." class="level3">
-<h3 class="anchored" data-anchor-id="target-and-prediction-setting--target-won-1-winner-0-loser-at-match-level.">Target and prediction setting- Target: <code>won</code> (1 = winner, 0 = loser) at match level.</h3>
+<section id="target-and-prediction-setting" class="level3">
+<h3 class="anchored" data-anchor-id="target-and-prediction-setting">Target and prediction setting</h3>
 <ul>
+<li>Target: <code>won</code> (1 = winner, 0 = loser) at match level.</li>
 <li>Pre-match setting: only features known before the match (rankings, surface, tournament level, season, player age/handedness).</li>
 <li>Post-match diagnostic setting: use in-match serve stats to explain outcomes (not for true pre-match prediction).</li>
 </ul>
 </section>
-<section id="features-and-preprocessing--encode-categorical-features-surface-tournament-level-and-scale-numeric-features." class="level3">
-<h3 class="anchored" data-anchor-id="features-and-preprocessing--encode-categorical-features-surface-tournament-level-and-scale-numeric-features.">Features and preprocessing- Encode categorical features (surface, tournament level) and scale numeric features.</h3>
+<section id="features-and-preprocessing" class="level3">
+<h3 class="anchored" data-anchor-id="features-and-preprocessing">Features and preprocessing</h3>
 <ul>
+<li>Encode categorical features (surface, tournament level) and scale numeric features.</li>
 <li>Handle missing values; remove obvious leakage fields (score, winner/loser names).</li>
-<li>For pre-match models, reshape into player vs opponent features (e.g., rank_diff) without using winner/loser labels.</li>
+<li>For pre-match models, reshape into player vs opponent features (e.g., <code>rank_diff</code>) without using winner/loser labels.</li>
 </ul>
 </section>
-<section id="baselines-and-models--baselines-majority-class-logistic-regression." class="level3">
-<h3 class="anchored" data-anchor-id="baselines-and-models--baselines-majority-class-logistic-regression.">Baselines and models- Baselines: majority class, logistic regression.</h3>
+<section id="baselines-and-models" class="level3">
+<h3 class="anchored" data-anchor-id="baselines-and-models">Baselines and models</h3>
 <ul>
+<li>Baselines: majority class, logistic regression.</li>
 <li>Candidate models: regularized logistic regression, random forest, gradient boosting.</li>
 </ul>
 </section>
-<section id="evaluation-and-error-analysis--time-aware-split-by-season-for-trainvalidationtest." class="level3">
-<h3 class="anchored" data-anchor-id="evaluation-and-error-analysis--time-aware-split-by-season-for-trainvalidationtest.">Evaluation and error analysis- Time-aware split by season for train/validation/test.</h3>
+<section id="evaluation-and-error-analysis" class="level3">
+<h3 class="anchored" data-anchor-id="evaluation-and-error-analysis">Evaluation and error analysis</h3>
 <ul>
+<li>Time-aware split by season for train/validation/test.</li>
+<li>Check class balance; if the target is heavily imbalanced, accuracy can be misleading.</li>
 <li>Metrics: accuracy, ROC-AUC, log loss; include calibration curves.</li>
 <li>Error analysis by surface, rank gap, and match duration.</li>
 </ul>
@@ -2248,46 +2328,46 @@ visualize distributions by surface, and summarize the key observations.</p>
 <h3 class="anchored" data-anchor-id="modeling-dataset-and-split">Modeling dataset and split</h3>
 <section id="prepare-season-and-serve-metrics" class="level4">
 <h4 class="anchored" data-anchor-id="prepare-season-and-serve-metrics">Prepare season and serve metrics</h4>
-<div id="0a3ced25" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="93">
+<div id="0a3ced25" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="122">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.1 Prepare season and serve metrics</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"tourney_date"</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"tourney_date"</span>] <span class="op">=</span> pd.to_datetime(matches[<span class="st">"tourney_date"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>matches[<span class="st">"season"</span>] <span class="op">=</span> matches[<span class="st">"tourney_date"</span>].dt.year</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> safe_div(n, d):</span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (n <span class="op">/</span> d).replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure serve metrics exist (used by diagnostic models)</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_1st_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_1st_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_1stIn"</span>], matches[<span class="st">"w_svpt"</span>])</span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_1st_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_1stIn"</span>], matches[<span class="st">"l_svpt"</span>])</span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_1stWon_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_1stWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_1stWon"</span>], matches[<span class="st">"w_1stIn"</span>])</span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_1stWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_1stWon"</span>], matches[<span class="st">"l_1stIn"</span>])</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-21"><a href="#cb25-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_2ndIn_calc"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-22"><a href="#cb25-22" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_2ndIn_calc"</span>] <span class="op">=</span> (matches[<span class="st">"w_svpt"</span>] <span class="op">-</span> matches[<span class="st">"w_1stIn"</span>]).clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb25-23"><a href="#cb25-23" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_2ndIn_calc"</span>] <span class="op">=</span> (matches[<span class="st">"l_svpt"</span>] <span class="op">-</span> matches[<span class="st">"l_1stIn"</span>]).clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb25-24"><a href="#cb25-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-25"><a href="#cb25-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_2ndWon_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-26"><a href="#cb25-26" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_2ndWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_2ndWon"</span>], matches[<span class="st">"w_2ndIn_calc"</span>])</span>
-<span id="cb25-27"><a href="#cb25-27" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_2ndWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_2ndWon"</span>], matches[<span class="st">"l_2ndIn_calc"</span>])</span>
-<span id="cb25-28"><a href="#cb25-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-29"><a href="#cb25-29" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_df_per_game"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-30"><a href="#cb25-30" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_df_per_game"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_df"</span>], matches[<span class="st">"w_SvGms"</span>])</span>
-<span id="cb25-31"><a href="#cb25-31" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_df_per_game"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_df"</span>], matches[<span class="st">"l_SvGms"</span>])</span>
-<span id="cb25-32"><a href="#cb25-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-33"><a href="#cb25-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_bp_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
-<span id="cb25-34"><a href="#cb25-34" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_bp_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_bpSaved"</span>], matches[<span class="st">"w_bpFaced"</span>]).fillna(<span class="fl">1.0</span>)</span>
-<span id="cb25-35"><a href="#cb25-35" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_bp_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_bpSaved"</span>], matches[<span class="st">"l_bpFaced"</span>]).fillna(<span class="fl">1.0</span>)</span>
-<span id="cb25-36"><a href="#cb25-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-37"><a href="#cb25-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Matches: </span><span class="sc">{</span><span class="bu">len</span>(matches)<span class="sc">:,}</span><span class="ss"> | Seasons: </span><span class="sc">{</span>matches[<span class="st">'season'</span>]<span class="sc">.</span>nunique()<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.1 Prepare season and serve metrics</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"tourney_date"</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"tourney_date"</span>] <span class="op">=</span> pd.to_datetime(matches[<span class="st">"tourney_date"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>matches[<span class="st">"season"</span>] <span class="op">=</span> matches[<span class="st">"tourney_date"</span>].dt.year</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> safe_div(n, d):</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (n <span class="op">/</span> d).replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure serve metrics exist (used by diagnostic models)</span></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_1st_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_1st_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_1stIn"</span>], matches[<span class="st">"w_svpt"</span>])</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_1st_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_1stIn"</span>], matches[<span class="st">"l_svpt"</span>])</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_1stWon_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_1stWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_1stWon"</span>], matches[<span class="st">"w_1stIn"</span>])</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_1stWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_1stWon"</span>], matches[<span class="st">"l_1stIn"</span>])</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_2ndIn_calc"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_2ndIn_calc"</span>] <span class="op">=</span> (matches[<span class="st">"w_svpt"</span>] <span class="op">-</span> matches[<span class="st">"w_1stIn"</span>]).clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_2ndIn_calc"</span>] <span class="op">=</span> (matches[<span class="st">"l_svpt"</span>] <span class="op">-</span> matches[<span class="st">"l_1stIn"</span>]).clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_2ndWon_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_2ndWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_2ndWon"</span>], matches[<span class="st">"w_2ndIn_calc"</span>])</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_2ndWon_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_2ndWon"</span>], matches[<span class="st">"l_2ndIn_calc"</span>])</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_df_per_game"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_df_per_game"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_df"</span>], matches[<span class="st">"w_SvGms"</span>])</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_df_per_game"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_df"</span>], matches[<span class="st">"l_SvGms"</span>])</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"w_bp_pct"</span> <span class="kw">not</span> <span class="kw">in</span> matches.columns:</span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"w_bp_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"w_bpSaved"</span>], matches[<span class="st">"w_bpFaced"</span>]).fillna(<span class="fl">1.0</span>)</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>    matches[<span class="st">"l_bp_pct"</span>] <span class="op">=</span> safe_div(matches[<span class="st">"l_bpSaved"</span>], matches[<span class="st">"l_bpFaced"</span>]).fillna(<span class="fl">1.0</span>)</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Matches: </span><span class="sc">{</span><span class="bu">len</span>(matches)<span class="sc">:,}</span><span class="ss"> | Seasons: </span><span class="sc">{</span>matches[<span class="st">'season'</span>]<span class="sc">.</span>nunique()<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Matches: 46,658 | Seasons: 9</code></pre>
@@ -2296,72 +2376,72 @@ visualize distributions by surface, and summarize the key observations.</p>
 </section>
 <section id="build-player-and-opponent-rows" class="level4">
 <h4 class="anchored" data-anchor-id="build-player-and-opponent-rows">Build player and opponent rows</h4>
-<div id="8db9d449" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="94">
+<div id="8db9d449" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="123">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.2 Build player and opponent rows</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>base_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> [</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tourney_date"</span>, <span class="st">"season"</span>, <span class="st">"surface"</span>, <span class="st">"tourney_level"</span>, <span class="st">"best_of"</span>, <span class="st">"round"</span>, <span class="st">"minutes"</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>] <span class="cf">if</span> c <span class="kw">in</span> matches.columns]</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>meta_map <span class="op">=</span> {</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank"</span>: (<span class="st">"winner_rank"</span>, <span class="st">"loser_rank"</span>),</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank_points"</span>: (<span class="st">"winner_rank_points"</span>, <span class="st">"loser_rank_points"</span>),</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seed"</span>: (<span class="st">"winner_seed"</span>, <span class="st">"loser_seed"</span>),</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"entry"</span>: (<span class="st">"winner_entry"</span>, <span class="st">"loser_entry"</span>),</span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hand"</span>: (<span class="st">"winner_hand"</span>, <span class="st">"loser_hand"</span>),</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ht"</span>: (<span class="st">"winner_ht"</span>, <span class="st">"loser_ht"</span>),</span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: (<span class="st">"winner_age"</span>, <span class="st">"loser_age"</span>),</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>serve_map <span class="op">=</span> {</span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1st_pct"</span>: (<span class="st">"w_1st_pct"</span>, <span class="st">"l_1st_pct"</span>),</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1stWon_pct"</span>: (<span class="st">"w_1stWon_pct"</span>, <span class="st">"l_1stWon_pct"</span>),</span>
-<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2ndWon_pct"</span>: (<span class="st">"w_2ndWon_pct"</span>, <span class="st">"l_2ndWon_pct"</span>),</span>
-<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"df_per_game"</span>: (<span class="st">"w_df_per_game"</span>, <span class="st">"l_df_per_game"</span>),</span>
-<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bp_pct"</span>: (<span class="st">"w_bp_pct"</span>, <span class="st">"l_bp_pct"</span>),</span>
-<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_rows(df, is_winner, include_serve<span class="op">=</span><span class="va">False</span>):</span>
-<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {col: df[col] <span class="cf">for</span> col <span class="kw">in</span> base_cols}</span>
-<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> suffix, (w_col, l_col) <span class="kw">in</span> meta_map.items():</span>
-<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> w_col <span class="kw">in</span> df.columns <span class="kw">and</span> l_col <span class="kw">in</span> df.columns:</span>
-<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> is_winner:</span>
-<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
-<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
-<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
-<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
-<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
-<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> include_serve:</span>
-<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> suffix, (w_col, l_col) <span class="kw">in</span> serve_map.items():</span>
-<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> w_col <span class="kw">in</span> df.columns <span class="kw">and</span> l_col <span class="kw">in</span> df.columns:</span>
-<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> is_winner:</span>
-<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
-<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
-<span id="cb27-43"><a href="#cb27-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
-<span id="cb27-44"><a href="#cb27-44" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
-<span id="cb27-45"><a href="#cb27-45" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
-<span id="cb27-46"><a href="#cb27-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-47"><a href="#cb27-47" aria-hidden="true" tabindex="-1"></a>    data[<span class="st">"won"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> is_winner <span class="cf">else</span> <span class="dv">0</span></span>
-<span id="cb27-48"><a href="#cb27-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(data)</span>
-<span id="cb27-49"><a href="#cb27-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-50"><a href="#cb27-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-51"><a href="#cb27-51" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> pd.concat(</span>
-<span id="cb27-52"><a href="#cb27-52" aria-hidden="true" tabindex="-1"></a>    [build_rows(matches, <span class="va">True</span>, include_serve<span class="op">=</span><span class="va">False</span>),</span>
-<span id="cb27-53"><a href="#cb27-53" aria-hidden="true" tabindex="-1"></a>     build_rows(matches, <span class="va">False</span>, include_serve<span class="op">=</span><span class="va">False</span>)],</span>
-<span id="cb27-54"><a href="#cb27-54" aria-hidden="true" tabindex="-1"></a>    ignore_index<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb27-55"><a href="#cb27-55" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-56"><a href="#cb27-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-57"><a href="#cb27-57" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> pd.concat(</span>
-<span id="cb27-58"><a href="#cb27-58" aria-hidden="true" tabindex="-1"></a>    [build_rows(matches, <span class="va">True</span>, include_serve<span class="op">=</span><span class="va">True</span>),</span>
-<span id="cb27-59"><a href="#cb27-59" aria-hidden="true" tabindex="-1"></a>     build_rows(matches, <span class="va">False</span>, include_serve<span class="op">=</span><span class="va">True</span>)],</span>
-<span id="cb27-60"><a href="#cb27-60" aria-hidden="true" tabindex="-1"></a>    ignore_index<span class="op">=</span><span class="va">True</span>,</span>
-<span id="cb27-61"><a href="#cb27-61" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-62"><a href="#cb27-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-63"><a href="#cb27-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pre-match rows: </span><span class="sc">{</span><span class="bu">len</span>(df_pre)<span class="sc">:,}</span><span class="ss"> | Diagnostic rows: </span><span class="sc">{</span><span class="bu">len</span>(df_diag)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.2 Build player and opponent rows</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>base_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> [</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"tourney_date"</span>, <span class="st">"season"</span>, <span class="st">"surface"</span>, <span class="st">"tourney_level"</span>, <span class="st">"best_of"</span>, <span class="st">"round"</span>, <span class="st">"minutes"</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>] <span class="cf">if</span> c <span class="kw">in</span> matches.columns]</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>meta_map <span class="op">=</span> {</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank"</span>: (<span class="st">"winner_rank"</span>, <span class="st">"loser_rank"</span>),</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank_points"</span>: (<span class="st">"winner_rank_points"</span>, <span class="st">"loser_rank_points"</span>),</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"seed"</span>: (<span class="st">"winner_seed"</span>, <span class="st">"loser_seed"</span>),</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">"entry"</span>: (<span class="st">"winner_entry"</span>, <span class="st">"loser_entry"</span>),</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"hand"</span>: (<span class="st">"winner_hand"</span>, <span class="st">"loser_hand"</span>),</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ht"</span>: (<span class="st">"winner_ht"</span>, <span class="st">"loser_ht"</span>),</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"age"</span>: (<span class="st">"winner_age"</span>, <span class="st">"loser_age"</span>),</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>serve_map <span class="op">=</span> {</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1st_pct"</span>: (<span class="st">"w_1st_pct"</span>, <span class="st">"l_1st_pct"</span>),</span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1stWon_pct"</span>: (<span class="st">"w_1stWon_pct"</span>, <span class="st">"l_1stWon_pct"</span>),</span>
+<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>    <span class="st">"2ndWon_pct"</span>: (<span class="st">"w_2ndWon_pct"</span>, <span class="st">"l_2ndWon_pct"</span>),</span>
+<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>    <span class="st">"df_per_game"</span>: (<span class="st">"w_df_per_game"</span>, <span class="st">"l_df_per_game"</span>),</span>
+<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>    <span class="st">"bp_pct"</span>: (<span class="st">"w_bp_pct"</span>, <span class="st">"l_bp_pct"</span>),</span>
+<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_rows(df, is_winner, include_serve<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a>    data <span class="op">=</span> {col: df[col] <span class="cf">for</span> col <span class="kw">in</span> base_cols}</span>
+<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> suffix, (w_col, l_col) <span class="kw">in</span> meta_map.items():</span>
+<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> w_col <span class="kw">in</span> df.columns <span class="kw">and</span> l_col <span class="kw">in</span> df.columns:</span>
+<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> is_winner:</span>
+<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
+<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
+<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">else</span>:</span>
+<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
+<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>                data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
+<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> include_serve:</span>
+<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> suffix, (w_col, l_col) <span class="kw">in</span> serve_map.items():</span>
+<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> w_col <span class="kw">in</span> df.columns <span class="kw">and</span> l_col <span class="kw">in</span> df.columns:</span>
+<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span> is_winner:</span>
+<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
+<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
+<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span>:</span>
+<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[l_col]</span>
+<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>                    data[<span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span>] <span class="op">=</span> df[w_col]</span>
+<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>    data[<span class="st">"won"</span>] <span class="op">=</span> <span class="dv">1</span> <span class="cf">if</span> is_winner <span class="cf">else</span> <span class="dv">0</span></span>
+<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.DataFrame(data)</span>
+<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> pd.concat(</span>
+<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a>    [build_rows(matches, <span class="va">True</span>, include_serve<span class="op">=</span><span class="va">False</span>),</span>
+<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a>     build_rows(matches, <span class="va">False</span>, include_serve<span class="op">=</span><span class="va">False</span>)],</span>
+<span id="cb29-54"><a href="#cb29-54" aria-hidden="true" tabindex="-1"></a>    ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb29-55"><a href="#cb29-55" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-56"><a href="#cb29-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-57"><a href="#cb29-57" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> pd.concat(</span>
+<span id="cb29-58"><a href="#cb29-58" aria-hidden="true" tabindex="-1"></a>    [build_rows(matches, <span class="va">True</span>, include_serve<span class="op">=</span><span class="va">True</span>),</span>
+<span id="cb29-59"><a href="#cb29-59" aria-hidden="true" tabindex="-1"></a>     build_rows(matches, <span class="va">False</span>, include_serve<span class="op">=</span><span class="va">True</span>)],</span>
+<span id="cb29-60"><a href="#cb29-60" aria-hidden="true" tabindex="-1"></a>    ignore_index<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb29-61"><a href="#cb29-61" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb29-62"><a href="#cb29-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-63"><a href="#cb29-63" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pre-match rows: </span><span class="sc">{</span><span class="bu">len</span>(df_pre)<span class="sc">:,}</span><span class="ss"> | Diagnostic rows: </span><span class="sc">{</span><span class="bu">len</span>(df_diag)<span class="sc">:,}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pre-match rows: 93,316 | Diagnostic rows: 93,316</code></pre>
@@ -2370,65 +2450,179 @@ visualize distributions by surface, and summarize the key observations.</p>
 </section>
 <section id="add-differential-features" class="level4">
 <h4 class="anchored" data-anchor-id="add-differential-features">Add differential features</h4>
-<div id="47b9e75e" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="95">
+<div id="47b9e75e" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="124">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.3 Add differential features</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> coerce_numeric(df, cols):</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> cols:</span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df.columns:</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>            df[col] <span class="op">=</span> pd.to_numeric(df[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> replace_inf(df, cols):</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> cols:</span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df.columns:</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>            df[col] <span class="op">=</span> df[col].replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_diffs(df, suffixes):</span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> suffix <span class="kw">in</span> suffixes:</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> <span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb29-20"><a href="#cb29-20" aria-hidden="true" tabindex="-1"></a>        o <span class="op">=</span> <span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span></span>
-<span id="cb29-21"><a href="#cb29-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="kw">in</span> df.columns <span class="kw">and</span> o <span class="kw">in</span> df.columns:</span>
-<span id="cb29-22"><a href="#cb29-22" aria-hidden="true" tabindex="-1"></a>            df[p] <span class="op">=</span> pd.to_numeric(df[p], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb29-23"><a href="#cb29-23" aria-hidden="true" tabindex="-1"></a>            df[o] <span class="op">=</span> pd.to_numeric(df[o], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb29-24"><a href="#cb29-24" aria-hidden="true" tabindex="-1"></a>            df[<span class="ss">f"</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">_diff"</span>] <span class="op">=</span> df[p] <span class="op">-</span> df[o]</span>
-<span id="cb29-25"><a href="#cb29-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
-<span id="cb29-26"><a href="#cb29-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-27"><a href="#cb29-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-28"><a href="#cb29-28" aria-hidden="true" tabindex="-1"></a>diff_suffixes <span class="op">=</span> [</span>
-<span id="cb29-29"><a href="#cb29-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank"</span>, <span class="st">"rank_points"</span>, <span class="st">"seed"</span>, <span class="st">"age"</span>, <span class="st">"ht"</span>,</span>
-<span id="cb29-30"><a href="#cb29-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1st_pct"</span>, <span class="st">"1stWon_pct"</span>, <span class="st">"2ndWon_pct"</span>, <span class="st">"df_per_game"</span>, <span class="st">"bp_pct"</span>,</span>
-<span id="cb29-31"><a href="#cb29-31" aria-hidden="true" tabindex="-1"></a>]</span>
-<span id="cb29-32"><a href="#cb29-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-33"><a href="#cb29-33" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> add_diffs(df_pre, diff_suffixes)</span>
-<span id="cb29-34"><a href="#cb29-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-35"><a href="#cb29-35" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> add_diffs(df_diag, diff_suffixes)</span>
-<span id="cb29-36"><a href="#cb29-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-37"><a href="#cb29-37" aria-hidden="true" tabindex="-1"></a>numeric_base <span class="op">=</span> [<span class="st">"best_of"</span>, <span class="st">"season"</span>, <span class="st">"minutes"</span>]</span>
-<span id="cb29-38"><a href="#cb29-38" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> (</span>
-<span id="cb29-39"><a href="#cb29-39" aria-hidden="true" tabindex="-1"></a>    numeric_base</span>
-<span id="cb29-40"><a href="#cb29-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"player_</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
-<span id="cb29-41"><a href="#cb29-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"opponent_</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
-<span id="cb29-42"><a href="#cb29-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">_diff"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
-<span id="cb29-43"><a href="#cb29-43" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-44"><a href="#cb29-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-45"><a href="#cb29-45" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> coerce_numeric(df_pre, numeric_cols)</span>
-<span id="cb29-46"><a href="#cb29-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-47"><a href="#cb29-47" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> coerce_numeric(df_diag, numeric_cols)</span>
-<span id="cb29-48"><a href="#cb29-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-49"><a href="#cb29-49" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> replace_inf(df_pre, numeric_cols)</span>
-<span id="cb29-50"><a href="#cb29-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-51"><a href="#cb29-51" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> replace_inf(df_diag, numeric_cols)</span>
-<span id="cb29-52"><a href="#cb29-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-53"><a href="#cb29-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pre-match shape: </span><span class="sc">{</span>df_pre<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> | Diagnostic shape: </span><span class="sc">{</span>df_diag<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 6.5.3 Add differential features</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> coerce_numeric(df, cols):</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> cols:</span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>            df[col] <span class="op">=</span> pd.to_numeric(df[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> replace_inf(df, cols):</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> cols:</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col <span class="kw">in</span> df.columns:</span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>            df[col] <span class="op">=</span> df[col].replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> add_diffs(df, suffixes):</span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> suffix <span class="kw">in</span> suffixes:</span>
+<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> <span class="ss">f"player_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a>        o <span class="op">=</span> <span class="ss">f"opponent_</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p <span class="kw">in</span> df.columns <span class="kw">and</span> o <span class="kw">in</span> df.columns:</span>
+<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>            df[p] <span class="op">=</span> pd.to_numeric(df[p], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>            df[o] <span class="op">=</span> pd.to_numeric(df[o], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>            df[<span class="ss">f"</span><span class="sc">{</span>suffix<span class="sc">}</span><span class="ss">_diff"</span>] <span class="op">=</span> df[p] <span class="op">-</span> df[o]</span>
+<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df</span>
+<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>diff_suffixes <span class="op">=</span> [</span>
+<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rank"</span>, <span class="st">"rank_points"</span>, <span class="st">"seed"</span>, <span class="st">"age"</span>, <span class="st">"ht"</span>,</span>
+<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    <span class="st">"1st_pct"</span>, <span class="st">"1stWon_pct"</span>, <span class="st">"2ndWon_pct"</span>, <span class="st">"df_per_game"</span>, <span class="st">"bp_pct"</span>,</span>
+<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> add_diffs(df_pre, diff_suffixes)</span>
+<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> add_diffs(df_diag, diff_suffixes)</span>
+<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>numeric_base <span class="op">=</span> [<span class="st">"best_of"</span>, <span class="st">"season"</span>, <span class="st">"minutes"</span>]</span>
+<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="op">=</span> (</span>
+<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>    numeric_base</span>
+<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"player_</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
+<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"opponent_</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
+<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>    <span class="op">+</span> [<span class="ss">f"</span><span class="sc">{</span>s<span class="sc">}</span><span class="ss">_diff"</span> <span class="cf">for</span> s <span class="kw">in</span> diff_suffixes]</span>
+<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> coerce_numeric(df_pre, numeric_cols)</span>
+<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> coerce_numeric(df_diag, numeric_cols)</span>
+<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>df_pre <span class="op">=</span> replace_inf(df_pre, numeric_cols)</span>
+<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>df_diag <span class="op">=</span> replace_inf(df_diag, numeric_cols)</span>
+<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Pre-match shape: </span><span class="sc">{</span>df_pre<span class="sc">.</span>shape<span class="sc">}</span><span class="ss"> | Diagnostic shape: </span><span class="sc">{</span>df_diag<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pre-match shape: (93316, 27) | Diagnostic shape: (93316, 42)</code></pre>
+</div>
+</div>
+</section>
+<section id="class-balance-check" class="level4">
+<h4 class="anchored" data-anchor-id="class-balance-check">Class balance check</h4>
+<p>We verify the proportion of winners and losers in the modeling tables. Because each match contributes a winner and a loser row, the target is expected to be close to 50/50. This means accuracy remains interpretable, but ROC-AUC and log loss are still preferred for ranking and calibration.</p>
+<div id="8c17857c" class="cell" data-execution_count="125">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> show_class_balance(df, label):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>    balance <span class="op">=</span> (</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>        df[<span class="st">"won"</span>]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>        .value_counts(dropna<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>        .rename_axis(<span class="st">"won"</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>        .reset_index(name<span class="op">=</span><span class="st">"count"</span>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"won"</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>    balance[<span class="st">"pct"</span>] <span class="op">=</span> (balance[<span class="st">"count"</span>] <span class="op">/</span> balance[<span class="st">"count"</span>].<span class="bu">sum</span>() <span class="op">*</span> <span class="dv">100</span>).<span class="bu">round</span>(<span class="dv">2</span>)</span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>    balance[<span class="st">"label"</span>] <span class="op">=</span> balance[<span class="st">"won"</span>].<span class="bu">map</span>({<span class="dv">0</span>: <span class="st">"0 (loss)"</span>, <span class="dv">1</span>: <span class="st">"1 (win)"</span>}).fillna(<span class="st">"missing"</span>)</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>    display(balance[[<span class="st">"label"</span>, <span class="st">"count"</span>, <span class="st">"pct"</span>]].set_index(<span class="st">"label"</span>))</span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>    order <span class="op">=</span> [x <span class="cf">for</span> x <span class="kw">in</span> [<span class="st">"0 (loss)"</span>, <span class="st">"1 (win)"</span>, <span class="st">"missing"</span>] <span class="cf">if</span> x <span class="kw">in</span> balance[<span class="st">"label"</span>].tolist()]</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="fl">4.5</span>, <span class="dv">3</span>))</span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>    sns.barplot(data<span class="op">=</span>balance, x<span class="op">=</span><span class="st">"label"</span>, y<span class="op">=</span><span class="st">"count"</span>, order<span class="op">=</span>order, color<span class="op">=</span><span class="st">"#4c72b0"</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> class balance"</span>, fontsize<span class="op">=</span><span class="dv">12</span>)</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">"Class"</span>)</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">"Count"</span>)</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-24"><a href="#cb33-24" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_pre, <span class="st">"Pre-match"</span>)</span>
+<span id="cb33-25"><a href="#cb33-25" aria-hidden="true" tabindex="-1"></a>show_class_balance(df_diag, <span class="st">"Diagnostic"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">pct</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">label</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0 (loss)</th>
+<td>46658</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1 (win)</th>
+<td>46658</td>
+<td>50.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hm_datasciende_files/figure-html/cell-24-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">count</th>
+<th data-quarto-table-cell-role="th">pct</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">label</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0 (loss)</th>
+<td>46658</td>
+<td>50.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1 (win)</th>
+<td>46658</td>
+<td>50.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="hm_datasciende_files/figure-html/cell-24-output-4.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -2437,219 +2631,219 @@ visualize distributions by surface, and summarize the key observations.</p>
 <h3 class="anchored" data-anchor-id="train-validate-and-test-models">Train, validate, and test models</h3>
 <section id="imports-and-helper-functions" class="level4">
 <h4 class="anchored" data-anchor-id="imports-and-helper-functions">Imports and helper functions</h4>
-<div id="8a50a187" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="96">
+<div id="8a50a187" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="126">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, roc_auc_score, log_loss</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier, GradientBoostingClassifier</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> clone</span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_ohe():</span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>    ohe_kwargs <span class="op">=</span> {<span class="st">"handle_unknown"</span>: <span class="st">"ignore"</span>}</span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"sparse_output"</span> <span class="kw">in</span> OneHotEncoder().get_params():</span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>        ohe_kwargs[<span class="st">"sparse_output"</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
-<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a>        ohe_kwargs[<span class="st">"sparse"</span>] <span class="op">=</span> <span class="va">False</span></span>
-<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> OneHotEncoder(<span class="op">**</span>ohe_kwargs)</span>
-<span id="cb31-19"><a href="#cb31-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-20"><a href="#cb31-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-21"><a href="#cb31-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> time_split(df, season_col<span class="op">=</span><span class="st">"season"</span>):</span>
-<span id="cb31-22"><a href="#cb31-22" aria-hidden="true" tabindex="-1"></a>    seasons <span class="op">=</span> <span class="bu">sorted</span>(df[season_col].dropna().unique())</span>
-<span id="cb31-23"><a href="#cb31-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(seasons) <span class="op">&lt;</span> <span class="dv">3</span>:</span>
-<span id="cb31-24"><a href="#cb31-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Need at least 3 seasons for train/val/test split."</span>)</span>
-<span id="cb31-25"><a href="#cb31-25" aria-hidden="true" tabindex="-1"></a>    train_seasons <span class="op">=</span> seasons[:<span class="op">-</span><span class="dv">2</span>]</span>
-<span id="cb31-26"><a href="#cb31-26" aria-hidden="true" tabindex="-1"></a>    val_season <span class="op">=</span> seasons[<span class="op">-</span><span class="dv">2</span>]</span>
-<span id="cb31-27"><a href="#cb31-27" aria-hidden="true" tabindex="-1"></a>    test_season <span class="op">=</span> seasons[<span class="op">-</span><span class="dv">1</span>]</span>
-<span id="cb31-28"><a href="#cb31-28" aria-hidden="true" tabindex="-1"></a>    df_train <span class="op">=</span> df[df[season_col].isin(train_seasons)].copy()</span>
-<span id="cb31-29"><a href="#cb31-29" aria-hidden="true" tabindex="-1"></a>    df_val <span class="op">=</span> df[df[season_col] <span class="op">==</span> val_season].copy()</span>
-<span id="cb31-30"><a href="#cb31-30" aria-hidden="true" tabindex="-1"></a>    df_test <span class="op">=</span> df[df[season_col] <span class="op">==</span> test_season].copy()</span>
-<span id="cb31-31"><a href="#cb31-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_train, df_val, df_test, train_seasons, val_season, test_season</span>
-<span id="cb31-32"><a href="#cb31-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-33"><a href="#cb31-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-34"><a href="#cb31-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_feature_lists(df, extra_numeric<span class="op">=</span><span class="va">None</span>):</span>
-<span id="cb31-35"><a href="#cb31-35" aria-hidden="true" tabindex="-1"></a>    categorical <span class="op">=</span> [</span>
-<span id="cb31-36"><a href="#cb31-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"surface"</span>,</span>
-<span id="cb31-37"><a href="#cb31-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tourney_level"</span>,</span>
-<span id="cb31-38"><a href="#cb31-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"round"</span>,</span>
-<span id="cb31-39"><a href="#cb31-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_hand"</span>,</span>
-<span id="cb31-40"><a href="#cb31-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_hand"</span>,</span>
-<span id="cb31-41"><a href="#cb31-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_entry"</span>,</span>
-<span id="cb31-42"><a href="#cb31-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_entry"</span>,</span>
-<span id="cb31-43"><a href="#cb31-43" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb31-44"><a href="#cb31-44" aria-hidden="true" tabindex="-1"></a>    numeric <span class="op">=</span> [</span>
-<span id="cb31-45"><a href="#cb31-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"best_of"</span>,</span>
-<span id="cb31-46"><a href="#cb31-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"season"</span>,</span>
-<span id="cb31-47"><a href="#cb31-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_rank"</span>,</span>
-<span id="cb31-48"><a href="#cb31-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_rank"</span>,</span>
-<span id="cb31-49"><a href="#cb31-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rank_diff"</span>,</span>
-<span id="cb31-50"><a href="#cb31-50" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_rank_points"</span>,</span>
-<span id="cb31-51"><a href="#cb31-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_rank_points"</span>,</span>
-<span id="cb31-52"><a href="#cb31-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rank_points_diff"</span>,</span>
-<span id="cb31-53"><a href="#cb31-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_seed"</span>,</span>
-<span id="cb31-54"><a href="#cb31-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_seed"</span>,</span>
-<span id="cb31-55"><a href="#cb31-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"seed_diff"</span>,</span>
-<span id="cb31-56"><a href="#cb31-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_age"</span>,</span>
-<span id="cb31-57"><a href="#cb31-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_age"</span>,</span>
-<span id="cb31-58"><a href="#cb31-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"age_diff"</span>,</span>
-<span id="cb31-59"><a href="#cb31-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_ht"</span>,</span>
-<span id="cb31-60"><a href="#cb31-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_ht"</span>,</span>
-<span id="cb31-61"><a href="#cb31-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ht_diff"</span>,</span>
-<span id="cb31-62"><a href="#cb31-62" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb31-63"><a href="#cb31-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> extra_numeric:</span>
-<span id="cb31-64"><a href="#cb31-64" aria-hidden="true" tabindex="-1"></a>        numeric <span class="op">=</span> numeric <span class="op">+</span> extra_numeric</span>
-<span id="cb31-65"><a href="#cb31-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-66"><a href="#cb31-66" aria-hidden="true" tabindex="-1"></a>    categorical <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> categorical <span class="cf">if</span> c <span class="kw">in</span> df.columns]</span>
-<span id="cb31-67"><a href="#cb31-67" aria-hidden="true" tabindex="-1"></a>    numeric <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> numeric <span class="cf">if</span> c <span class="kw">in</span> df.columns]</span>
-<span id="cb31-68"><a href="#cb31-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> categorical, numeric</span>
-<span id="cb31-69"><a href="#cb31-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-70"><a href="#cb31-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-71"><a href="#cb31-71" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_metrics(y_true, probs):</span>
-<span id="cb31-72"><a href="#cb31-72" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> np.asarray(probs)</span>
-<span id="cb31-73"><a href="#cb31-73" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> np.clip(probs, <span class="fl">1e-6</span>, <span class="dv">1</span> <span class="op">-</span> <span class="fl">1e-6</span>)</span>
-<span id="cb31-74"><a href="#cb31-74" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> (probs <span class="op">&gt;=</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb31-75"><a href="#cb31-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
-<span id="cb31-76"><a href="#cb31-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">"accuracy"</span>: accuracy_score(y_true, preds),</span>
-<span id="cb31-77"><a href="#cb31-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">"roc_auc"</span>: roc_auc_score(y_true, probs),</span>
-<span id="cb31-78"><a href="#cb31-78" aria-hidden="true" tabindex="-1"></a>        <span class="st">"log_loss"</span>: log_loss(y_true, probs),</span>
-<span id="cb31-79"><a href="#cb31-79" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.compose <span class="im">import</span> ColumnTransformer</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> OneHotEncoder, StandardScaler</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.impute <span class="im">import</span> SimpleImputer</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.pipeline <span class="im">import</span> Pipeline</span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> accuracy_score, roc_auc_score, log_loss</span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LogisticRegression</span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.ensemble <span class="im">import</span> RandomForestClassifier, GradientBoostingClassifier</span>
+<span id="cb34-8"><a href="#cb34-8" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.base <span class="im">import</span> clone</span>
+<span id="cb34-9"><a href="#cb34-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb34-10"><a href="#cb34-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-11"><a href="#cb34-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-12"><a href="#cb34-12" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_ohe():</span>
+<span id="cb34-13"><a href="#cb34-13" aria-hidden="true" tabindex="-1"></a>    ohe_kwargs <span class="op">=</span> {<span class="st">"handle_unknown"</span>: <span class="st">"ignore"</span>}</span>
+<span id="cb34-14"><a href="#cb34-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="st">"sparse_output"</span> <span class="kw">in</span> OneHotEncoder().get_params():</span>
+<span id="cb34-15"><a href="#cb34-15" aria-hidden="true" tabindex="-1"></a>        ohe_kwargs[<span class="st">"sparse_output"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb34-16"><a href="#cb34-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb34-17"><a href="#cb34-17" aria-hidden="true" tabindex="-1"></a>        ohe_kwargs[<span class="st">"sparse"</span>] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb34-18"><a href="#cb34-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> OneHotEncoder(<span class="op">**</span>ohe_kwargs)</span>
+<span id="cb34-19"><a href="#cb34-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-20"><a href="#cb34-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-21"><a href="#cb34-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> time_split(df, season_col<span class="op">=</span><span class="st">"season"</span>):</span>
+<span id="cb34-22"><a href="#cb34-22" aria-hidden="true" tabindex="-1"></a>    seasons <span class="op">=</span> <span class="bu">sorted</span>(df[season_col].dropna().unique())</span>
+<span id="cb34-23"><a href="#cb34-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(seasons) <span class="op">&lt;</span> <span class="dv">3</span>:</span>
+<span id="cb34-24"><a href="#cb34-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Need at least 3 seasons for train/val/test split."</span>)</span>
+<span id="cb34-25"><a href="#cb34-25" aria-hidden="true" tabindex="-1"></a>    train_seasons <span class="op">=</span> seasons[:<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb34-26"><a href="#cb34-26" aria-hidden="true" tabindex="-1"></a>    val_season <span class="op">=</span> seasons[<span class="op">-</span><span class="dv">2</span>]</span>
+<span id="cb34-27"><a href="#cb34-27" aria-hidden="true" tabindex="-1"></a>    test_season <span class="op">=</span> seasons[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb34-28"><a href="#cb34-28" aria-hidden="true" tabindex="-1"></a>    df_train <span class="op">=</span> df[df[season_col].isin(train_seasons)].copy()</span>
+<span id="cb34-29"><a href="#cb34-29" aria-hidden="true" tabindex="-1"></a>    df_val <span class="op">=</span> df[df[season_col] <span class="op">==</span> val_season].copy()</span>
+<span id="cb34-30"><a href="#cb34-30" aria-hidden="true" tabindex="-1"></a>    df_test <span class="op">=</span> df[df[season_col] <span class="op">==</span> test_season].copy()</span>
+<span id="cb34-31"><a href="#cb34-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> df_train, df_val, df_test, train_seasons, val_season, test_season</span>
+<span id="cb34-32"><a href="#cb34-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-33"><a href="#cb34-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-34"><a href="#cb34-34" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> build_feature_lists(df, extra_numeric<span class="op">=</span><span class="va">None</span>):</span>
+<span id="cb34-35"><a href="#cb34-35" aria-hidden="true" tabindex="-1"></a>    categorical <span class="op">=</span> [</span>
+<span id="cb34-36"><a href="#cb34-36" aria-hidden="true" tabindex="-1"></a>        <span class="st">"surface"</span>,</span>
+<span id="cb34-37"><a href="#cb34-37" aria-hidden="true" tabindex="-1"></a>        <span class="st">"tourney_level"</span>,</span>
+<span id="cb34-38"><a href="#cb34-38" aria-hidden="true" tabindex="-1"></a>        <span class="st">"round"</span>,</span>
+<span id="cb34-39"><a href="#cb34-39" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_hand"</span>,</span>
+<span id="cb34-40"><a href="#cb34-40" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_hand"</span>,</span>
+<span id="cb34-41"><a href="#cb34-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_entry"</span>,</span>
+<span id="cb34-42"><a href="#cb34-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_entry"</span>,</span>
+<span id="cb34-43"><a href="#cb34-43" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb34-44"><a href="#cb34-44" aria-hidden="true" tabindex="-1"></a>    numeric <span class="op">=</span> [</span>
+<span id="cb34-45"><a href="#cb34-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"best_of"</span>,</span>
+<span id="cb34-46"><a href="#cb34-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"season"</span>,</span>
+<span id="cb34-47"><a href="#cb34-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_rank"</span>,</span>
+<span id="cb34-48"><a href="#cb34-48" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_rank"</span>,</span>
+<span id="cb34-49"><a href="#cb34-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rank_diff"</span>,</span>
+<span id="cb34-50"><a href="#cb34-50" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_rank_points"</span>,</span>
+<span id="cb34-51"><a href="#cb34-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_rank_points"</span>,</span>
+<span id="cb34-52"><a href="#cb34-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rank_points_diff"</span>,</span>
+<span id="cb34-53"><a href="#cb34-53" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_seed"</span>,</span>
+<span id="cb34-54"><a href="#cb34-54" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_seed"</span>,</span>
+<span id="cb34-55"><a href="#cb34-55" aria-hidden="true" tabindex="-1"></a>        <span class="st">"seed_diff"</span>,</span>
+<span id="cb34-56"><a href="#cb34-56" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_age"</span>,</span>
+<span id="cb34-57"><a href="#cb34-57" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_age"</span>,</span>
+<span id="cb34-58"><a href="#cb34-58" aria-hidden="true" tabindex="-1"></a>        <span class="st">"age_diff"</span>,</span>
+<span id="cb34-59"><a href="#cb34-59" aria-hidden="true" tabindex="-1"></a>        <span class="st">"player_ht"</span>,</span>
+<span id="cb34-60"><a href="#cb34-60" aria-hidden="true" tabindex="-1"></a>        <span class="st">"opponent_ht"</span>,</span>
+<span id="cb34-61"><a href="#cb34-61" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ht_diff"</span>,</span>
+<span id="cb34-62"><a href="#cb34-62" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb34-63"><a href="#cb34-63" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> extra_numeric:</span>
+<span id="cb34-64"><a href="#cb34-64" aria-hidden="true" tabindex="-1"></a>        numeric <span class="op">=</span> numeric <span class="op">+</span> extra_numeric</span>
+<span id="cb34-65"><a href="#cb34-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-66"><a href="#cb34-66" aria-hidden="true" tabindex="-1"></a>    categorical <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> categorical <span class="cf">if</span> c <span class="kw">in</span> df.columns]</span>
+<span id="cb34-67"><a href="#cb34-67" aria-hidden="true" tabindex="-1"></a>    numeric <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> numeric <span class="cf">if</span> c <span class="kw">in</span> df.columns]</span>
+<span id="cb34-68"><a href="#cb34-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> categorical, numeric</span>
+<span id="cb34-69"><a href="#cb34-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-70"><a href="#cb34-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-71"><a href="#cb34-71" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> evaluate_metrics(y_true, probs):</span>
+<span id="cb34-72"><a href="#cb34-72" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> np.asarray(probs)</span>
+<span id="cb34-73"><a href="#cb34-73" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> np.clip(probs, <span class="fl">1e-6</span>, <span class="dv">1</span> <span class="op">-</span> <span class="fl">1e-6</span>)</span>
+<span id="cb34-74"><a href="#cb34-74" aria-hidden="true" tabindex="-1"></a>    preds <span class="op">=</span> (probs <span class="op">&gt;=</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb34-75"><a href="#cb34-75" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {</span>
+<span id="cb34-76"><a href="#cb34-76" aria-hidden="true" tabindex="-1"></a>        <span class="st">"accuracy"</span>: accuracy_score(y_true, preds),</span>
+<span id="cb34-77"><a href="#cb34-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">"roc_auc"</span>: roc_auc_score(y_true, probs),</span>
+<span id="cb34-78"><a href="#cb34-78" aria-hidden="true" tabindex="-1"></a>        <span class="st">"log_loss"</span>: log_loss(y_true, probs),</span>
+<span id="cb34-79"><a href="#cb34-79" aria-hidden="true" tabindex="-1"></a>    }</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="training-and-evaluation-routine" class="level4">
 <h4 class="anchored" data-anchor-id="training-and-evaluation-routine">Training and evaluation routine</h4>
-<div id="2395e4fa" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="97">
+<div id="2395e4fa" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="127">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(df_train, df_val, df_test, categorical, numeric, label):</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    feature_cols <span class="op">=</span> categorical <span class="op">+</span> numeric</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> feature_cols:</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"No features available for modeling."</span>)</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df_ <span class="kw">in</span> (df_train, df_val, df_test):</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> numeric:</span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> col <span class="kw">in</span> df_.columns:</span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>                df_[col] <span class="op">=</span> pd.to_numeric(df_[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>                df_[col] <span class="op">=</span> df_[col].replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
-<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>    X_train <span class="op">=</span> df_train[feature_cols]</span>
-<span id="cb32-13"><a href="#cb32-13" aria-hidden="true" tabindex="-1"></a>    y_train <span class="op">=</span> df_train[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a>    X_val <span class="op">=</span> df_val[feature_cols]</span>
-<span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>    y_val <span class="op">=</span> df_val[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>    X_test <span class="op">=</span> df_test[feature_cols]</span>
-<span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a>    y_test <span class="op">=</span> df_test[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
-<span id="cb32-18"><a href="#cb32-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-19"><a href="#cb32-19" aria-hidden="true" tabindex="-1"></a>    numeric_transformer <span class="op">=</span> Pipeline(</span>
-<span id="cb32-20"><a href="#cb32-20" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
-<span id="cb32-21"><a href="#cb32-21" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
-<span id="cb32-22"><a href="#cb32-22" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scaler"</span>, StandardScaler()),</span>
-<span id="cb32-23"><a href="#cb32-23" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb32-24"><a href="#cb32-24" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb32-25"><a href="#cb32-25" aria-hidden="true" tabindex="-1"></a>    categorical_transformer <span class="op">=</span> Pipeline(</span>
-<span id="cb32-26"><a href="#cb32-26" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
-<span id="cb32-27"><a href="#cb32-27" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>)),</span>
-<span id="cb32-28"><a href="#cb32-28" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"onehot"</span>, make_ohe()),</span>
-<span id="cb32-29"><a href="#cb32-29" aria-hidden="true" tabindex="-1"></a>        ]</span>
-<span id="cb32-30"><a href="#cb32-30" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb32-31"><a href="#cb32-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-32"><a href="#cb32-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> make_preprocess():</span>
-<span id="cb32-33"><a href="#cb32-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ColumnTransformer(</span>
-<span id="cb32-34"><a href="#cb32-34" aria-hidden="true" tabindex="-1"></a>            transformers<span class="op">=</span>[</span>
-<span id="cb32-35"><a href="#cb32-35" aria-hidden="true" tabindex="-1"></a>                (<span class="st">"num"</span>, numeric_transformer, numeric),</span>
-<span id="cb32-36"><a href="#cb32-36" aria-hidden="true" tabindex="-1"></a>                (<span class="st">"cat"</span>, categorical_transformer, categorical),</span>
-<span id="cb32-37"><a href="#cb32-37" aria-hidden="true" tabindex="-1"></a>            ]</span>
-<span id="cb32-38"><a href="#cb32-38" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb32-39"><a href="#cb32-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-40"><a href="#cb32-40" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> {</span>
-<span id="cb32-41"><a href="#cb32-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"log_reg"</span>: LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>, class_weight<span class="op">=</span><span class="st">"balanced"</span>),</span>
-<span id="cb32-42"><a href="#cb32-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rf"</span>: RandomForestClassifier(</span>
-<span id="cb32-43"><a href="#cb32-43" aria-hidden="true" tabindex="-1"></a>            n_estimators<span class="op">=</span><span class="dv">300</span>, random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>, class_weight<span class="op">=</span><span class="st">"balanced"</span></span>
-<span id="cb32-44"><a href="#cb32-44" aria-hidden="true" tabindex="-1"></a>        ),</span>
-<span id="cb32-45"><a href="#cb32-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gb"</span>: GradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">42</span>),</span>
-<span id="cb32-46"><a href="#cb32-46" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb32-47"><a href="#cb32-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-48"><a href="#cb32-48" aria-hidden="true" tabindex="-1"></a>    val_rows <span class="op">=</span> []</span>
-<span id="cb32-49"><a href="#cb32-49" aria-hidden="true" tabindex="-1"></a>    base_prob <span class="op">=</span> y_train.mean()</span>
-<span id="cb32-50"><a href="#cb32-50" aria-hidden="true" tabindex="-1"></a>    val_rows.append({</span>
-<span id="cb32-51"><a href="#cb32-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: <span class="st">"baseline"</span>,</span>
-<span id="cb32-52"><a href="#cb32-52" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>evaluate_metrics(y_val, np.full(<span class="bu">len</span>(y_val), base_prob)),</span>
-<span id="cb32-53"><a href="#cb32-53" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb32-54"><a href="#cb32-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-55"><a href="#cb32-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
-<span id="cb32-56"><a href="#cb32-56" aria-hidden="true" tabindex="-1"></a>        pipe <span class="op">=</span> Pipeline([</span>
-<span id="cb32-57"><a href="#cb32-57" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"preprocess"</span>, make_preprocess()),</span>
-<span id="cb32-58"><a href="#cb32-58" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, clone(model)),</span>
-<span id="cb32-59"><a href="#cb32-59" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb32-60"><a href="#cb32-60" aria-hidden="true" tabindex="-1"></a>        pipe.fit(X_train, y_train)</span>
-<span id="cb32-61"><a href="#cb32-61" aria-hidden="true" tabindex="-1"></a>        val_probs <span class="op">=</span> pipe.predict_proba(X_val)[:, <span class="dv">1</span>]</span>
-<span id="cb32-62"><a href="#cb32-62" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> evaluate_metrics(y_val, val_probs)</span>
-<span id="cb32-63"><a href="#cb32-63" aria-hidden="true" tabindex="-1"></a>        metrics[<span class="st">"model"</span>] <span class="op">=</span> name</span>
-<span id="cb32-64"><a href="#cb32-64" aria-hidden="true" tabindex="-1"></a>        val_rows.append(metrics)</span>
-<span id="cb32-65"><a href="#cb32-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-66"><a href="#cb32-66" aria-hidden="true" tabindex="-1"></a>    val_df <span class="op">=</span> pd.DataFrame(val_rows).sort_values(<span class="st">"roc_auc"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb32-67"><a href="#cb32-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a>    model_rows <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> val_rows <span class="cf">if</span> r[<span class="st">"model"</span>] <span class="op">!=</span> <span class="st">"baseline"</span>]</span>
-<span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a>    best_name <span class="op">=</span> <span class="bu">max</span>(model_rows, key<span class="op">=</span><span class="kw">lambda</span> r: r[<span class="st">"roc_auc"</span>])[<span class="st">"model"</span>]</span>
-<span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a>    X_trainval <span class="op">=</span> pd.concat([X_train, X_val], axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a>    y_trainval <span class="op">=</span> pd.concat([y_train, y_val], axis<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a>    base_prob_test <span class="op">=</span> y_trainval.mean()</span>
-<span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a>    test_rows <span class="op">=</span> []</span>
-<span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a>    test_rows.append({</span>
-<span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: <span class="st">"baseline"</span>,</span>
-<span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>evaluate_metrics(y_test, np.full(<span class="bu">len</span>(y_test), base_prob_test)),</span>
-<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a>    })</span>
-<span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a>    best_pipe <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a>    best_test_probs <span class="op">=</span> <span class="va">None</span></span>
-<span id="cb32-83"><a href="#cb32-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-84"><a href="#cb32-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
-<span id="cb32-85"><a href="#cb32-85" aria-hidden="true" tabindex="-1"></a>        pipe <span class="op">=</span> Pipeline([</span>
-<span id="cb32-86"><a href="#cb32-86" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"preprocess"</span>, make_preprocess()),</span>
-<span id="cb32-87"><a href="#cb32-87" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, clone(model)),</span>
-<span id="cb32-88"><a href="#cb32-88" aria-hidden="true" tabindex="-1"></a>        ])</span>
-<span id="cb32-89"><a href="#cb32-89" aria-hidden="true" tabindex="-1"></a>        pipe.fit(X_trainval, y_trainval)</span>
-<span id="cb32-90"><a href="#cb32-90" aria-hidden="true" tabindex="-1"></a>        test_probs <span class="op">=</span> pipe.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
-<span id="cb32-91"><a href="#cb32-91" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> evaluate_metrics(y_test, test_probs)</span>
-<span id="cb32-92"><a href="#cb32-92" aria-hidden="true" tabindex="-1"></a>        metrics[<span class="st">"model"</span>] <span class="op">=</span> name</span>
-<span id="cb32-93"><a href="#cb32-93" aria-hidden="true" tabindex="-1"></a>        test_rows.append(metrics)</span>
-<span id="cb32-94"><a href="#cb32-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-95"><a href="#cb32-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name <span class="op">==</span> best_name:</span>
-<span id="cb32-96"><a href="#cb32-96" aria-hidden="true" tabindex="-1"></a>            best_pipe <span class="op">=</span> pipe</span>
-<span id="cb32-97"><a href="#cb32-97" aria-hidden="true" tabindex="-1"></a>            best_test_probs <span class="op">=</span> test_probs</span>
-<span id="cb32-98"><a href="#cb32-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-99"><a href="#cb32-99" aria-hidden="true" tabindex="-1"></a>    test_df <span class="op">=</span> pd.DataFrame(test_rows).sort_values(<span class="st">"roc_auc"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb32-100"><a href="#cb32-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-101"><a href="#cb32-101" aria-hidden="true" tabindex="-1"></a>    val_season <span class="op">=</span> df_val[<span class="st">"season"</span>].dropna().unique()</span>
-<span id="cb32-102"><a href="#cb32-102" aria-hidden="true" tabindex="-1"></a>    test_season <span class="op">=</span> df_test[<span class="st">"season"</span>].dropna().unique()</span>
-<span id="cb32-103"><a href="#cb32-103" aria-hidden="true" tabindex="-1"></a>    val_label <span class="op">=</span> val_season[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(val_season) <span class="cf">else</span> <span class="st">"n/a"</span></span>
-<span id="cb32-104"><a href="#cb32-104" aria-hidden="true" tabindex="-1"></a>    test_label <span class="op">=</span> test_season[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(test_season) <span class="cf">else</span> <span class="st">"n/a"</span></span>
-<span id="cb32-105"><a href="#cb32-105" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> split: train seasons=</span><span class="sc">{</span><span class="bu">len</span>(<span class="bu">set</span>(df_train[<span class="st">'season'</span>]))<span class="sc">}</span><span class="ss">, val=</span><span class="sc">{</span>val_label<span class="sc">}</span><span class="ss">, test=</span><span class="sc">{</span>test_label<span class="sc">}</span><span class="ss">"</span>)</span>
-<span id="cb32-106"><a href="#cb32-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-107"><a href="#cb32-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> val_df, test_df, best_name, best_pipe, best_test_probs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> run_experiment(df_train, df_val, df_test, categorical, numeric, label):</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    feature_cols <span class="op">=</span> categorical <span class="op">+</span> numeric</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> feature_cols:</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"No features available for modeling."</span>)</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> df_ <span class="kw">in</span> (df_train, df_val, df_test):</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> col <span class="kw">in</span> numeric:</span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> col <span class="kw">in</span> df_.columns:</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>                df_[col] <span class="op">=</span> pd.to_numeric(df_[col], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>                df_[col] <span class="op">=</span> df_[col].replace([np.inf, <span class="op">-</span>np.inf], np.nan)</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>    X_train <span class="op">=</span> df_train[feature_cols]</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>    y_train <span class="op">=</span> df_train[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>    X_val <span class="op">=</span> df_val[feature_cols]</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>    y_val <span class="op">=</span> df_val[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>    X_test <span class="op">=</span> df_test[feature_cols]</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>    y_test <span class="op">=</span> df_test[<span class="st">"won"</span>].astype(<span class="bu">int</span>)</span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>    numeric_transformer <span class="op">=</span> Pipeline(</span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"median"</span>)),</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"scaler"</span>, StandardScaler()),</span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a>    categorical_transformer <span class="op">=</span> Pipeline(</span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>        steps<span class="op">=</span>[</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"imputer"</span>, SimpleImputer(strategy<span class="op">=</span><span class="st">"most_frequent"</span>)),</span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"onehot"</span>, make_ohe()),</span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>        ]</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> make_preprocess():</span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> ColumnTransformer(</span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>            transformers<span class="op">=</span>[</span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>                (<span class="st">"num"</span>, numeric_transformer, numeric),</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>                (<span class="st">"cat"</span>, categorical_transformer, categorical),</span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>            ]</span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-40"><a href="#cb35-40" aria-hidden="true" tabindex="-1"></a>    models <span class="op">=</span> {</span>
+<span id="cb35-41"><a href="#cb35-41" aria-hidden="true" tabindex="-1"></a>        <span class="st">"log_reg"</span>: LogisticRegression(max_iter<span class="op">=</span><span class="dv">1000</span>, class_weight<span class="op">=</span><span class="st">"balanced"</span>),</span>
+<span id="cb35-42"><a href="#cb35-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"rf"</span>: RandomForestClassifier(</span>
+<span id="cb35-43"><a href="#cb35-43" aria-hidden="true" tabindex="-1"></a>            n_estimators<span class="op">=</span><span class="dv">300</span>, random_state<span class="op">=</span><span class="dv">42</span>, n_jobs<span class="op">=-</span><span class="dv">1</span>, class_weight<span class="op">=</span><span class="st">"balanced"</span></span>
+<span id="cb35-44"><a href="#cb35-44" aria-hidden="true" tabindex="-1"></a>        ),</span>
+<span id="cb35-45"><a href="#cb35-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"gb"</span>: GradientBoostingClassifier(random_state<span class="op">=</span><span class="dv">42</span>),</span>
+<span id="cb35-46"><a href="#cb35-46" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-47"><a href="#cb35-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-48"><a href="#cb35-48" aria-hidden="true" tabindex="-1"></a>    val_rows <span class="op">=</span> []</span>
+<span id="cb35-49"><a href="#cb35-49" aria-hidden="true" tabindex="-1"></a>    base_prob <span class="op">=</span> y_train.mean()</span>
+<span id="cb35-50"><a href="#cb35-50" aria-hidden="true" tabindex="-1"></a>    val_rows.append({</span>
+<span id="cb35-51"><a href="#cb35-51" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: <span class="st">"baseline"</span>,</span>
+<span id="cb35-52"><a href="#cb35-52" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>evaluate_metrics(y_val, np.full(<span class="bu">len</span>(y_val), base_prob)),</span>
+<span id="cb35-53"><a href="#cb35-53" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb35-54"><a href="#cb35-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-55"><a href="#cb35-55" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb35-56"><a href="#cb35-56" aria-hidden="true" tabindex="-1"></a>        pipe <span class="op">=</span> Pipeline([</span>
+<span id="cb35-57"><a href="#cb35-57" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"preprocess"</span>, make_preprocess()),</span>
+<span id="cb35-58"><a href="#cb35-58" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, clone(model)),</span>
+<span id="cb35-59"><a href="#cb35-59" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb35-60"><a href="#cb35-60" aria-hidden="true" tabindex="-1"></a>        pipe.fit(X_train, y_train)</span>
+<span id="cb35-61"><a href="#cb35-61" aria-hidden="true" tabindex="-1"></a>        val_probs <span class="op">=</span> pipe.predict_proba(X_val)[:, <span class="dv">1</span>]</span>
+<span id="cb35-62"><a href="#cb35-62" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> evaluate_metrics(y_val, val_probs)</span>
+<span id="cb35-63"><a href="#cb35-63" aria-hidden="true" tabindex="-1"></a>        metrics[<span class="st">"model"</span>] <span class="op">=</span> name</span>
+<span id="cb35-64"><a href="#cb35-64" aria-hidden="true" tabindex="-1"></a>        val_rows.append(metrics)</span>
+<span id="cb35-65"><a href="#cb35-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-66"><a href="#cb35-66" aria-hidden="true" tabindex="-1"></a>    val_df <span class="op">=</span> pd.DataFrame(val_rows).sort_values(<span class="st">"roc_auc"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb35-67"><a href="#cb35-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-68"><a href="#cb35-68" aria-hidden="true" tabindex="-1"></a>    model_rows <span class="op">=</span> [r <span class="cf">for</span> r <span class="kw">in</span> val_rows <span class="cf">if</span> r[<span class="st">"model"</span>] <span class="op">!=</span> <span class="st">"baseline"</span>]</span>
+<span id="cb35-69"><a href="#cb35-69" aria-hidden="true" tabindex="-1"></a>    best_name <span class="op">=</span> <span class="bu">max</span>(model_rows, key<span class="op">=</span><span class="kw">lambda</span> r: r[<span class="st">"roc_auc"</span>])[<span class="st">"model"</span>]</span>
+<span id="cb35-70"><a href="#cb35-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-71"><a href="#cb35-71" aria-hidden="true" tabindex="-1"></a>    X_trainval <span class="op">=</span> pd.concat([X_train, X_val], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb35-72"><a href="#cb35-72" aria-hidden="true" tabindex="-1"></a>    y_trainval <span class="op">=</span> pd.concat([y_train, y_val], axis<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb35-73"><a href="#cb35-73" aria-hidden="true" tabindex="-1"></a>    base_prob_test <span class="op">=</span> y_trainval.mean()</span>
+<span id="cb35-74"><a href="#cb35-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-75"><a href="#cb35-75" aria-hidden="true" tabindex="-1"></a>    test_rows <span class="op">=</span> []</span>
+<span id="cb35-76"><a href="#cb35-76" aria-hidden="true" tabindex="-1"></a>    test_rows.append({</span>
+<span id="cb35-77"><a href="#cb35-77" aria-hidden="true" tabindex="-1"></a>        <span class="st">"model"</span>: <span class="st">"baseline"</span>,</span>
+<span id="cb35-78"><a href="#cb35-78" aria-hidden="true" tabindex="-1"></a>        <span class="op">**</span>evaluate_metrics(y_test, np.full(<span class="bu">len</span>(y_test), base_prob_test)),</span>
+<span id="cb35-79"><a href="#cb35-79" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb35-80"><a href="#cb35-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-81"><a href="#cb35-81" aria-hidden="true" tabindex="-1"></a>    best_pipe <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb35-82"><a href="#cb35-82" aria-hidden="true" tabindex="-1"></a>    best_test_probs <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb35-83"><a href="#cb35-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-84"><a href="#cb35-84" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> name, model <span class="kw">in</span> models.items():</span>
+<span id="cb35-85"><a href="#cb35-85" aria-hidden="true" tabindex="-1"></a>        pipe <span class="op">=</span> Pipeline([</span>
+<span id="cb35-86"><a href="#cb35-86" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"preprocess"</span>, make_preprocess()),</span>
+<span id="cb35-87"><a href="#cb35-87" aria-hidden="true" tabindex="-1"></a>            (<span class="st">"model"</span>, clone(model)),</span>
+<span id="cb35-88"><a href="#cb35-88" aria-hidden="true" tabindex="-1"></a>        ])</span>
+<span id="cb35-89"><a href="#cb35-89" aria-hidden="true" tabindex="-1"></a>        pipe.fit(X_trainval, y_trainval)</span>
+<span id="cb35-90"><a href="#cb35-90" aria-hidden="true" tabindex="-1"></a>        test_probs <span class="op">=</span> pipe.predict_proba(X_test)[:, <span class="dv">1</span>]</span>
+<span id="cb35-91"><a href="#cb35-91" aria-hidden="true" tabindex="-1"></a>        metrics <span class="op">=</span> evaluate_metrics(y_test, test_probs)</span>
+<span id="cb35-92"><a href="#cb35-92" aria-hidden="true" tabindex="-1"></a>        metrics[<span class="st">"model"</span>] <span class="op">=</span> name</span>
+<span id="cb35-93"><a href="#cb35-93" aria-hidden="true" tabindex="-1"></a>        test_rows.append(metrics)</span>
+<span id="cb35-94"><a href="#cb35-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-95"><a href="#cb35-95" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> name <span class="op">==</span> best_name:</span>
+<span id="cb35-96"><a href="#cb35-96" aria-hidden="true" tabindex="-1"></a>            best_pipe <span class="op">=</span> pipe</span>
+<span id="cb35-97"><a href="#cb35-97" aria-hidden="true" tabindex="-1"></a>            best_test_probs <span class="op">=</span> test_probs</span>
+<span id="cb35-98"><a href="#cb35-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-99"><a href="#cb35-99" aria-hidden="true" tabindex="-1"></a>    test_df <span class="op">=</span> pd.DataFrame(test_rows).sort_values(<span class="st">"roc_auc"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb35-100"><a href="#cb35-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-101"><a href="#cb35-101" aria-hidden="true" tabindex="-1"></a>    val_season <span class="op">=</span> df_val[<span class="st">"season"</span>].dropna().unique()</span>
+<span id="cb35-102"><a href="#cb35-102" aria-hidden="true" tabindex="-1"></a>    test_season <span class="op">=</span> df_test[<span class="st">"season"</span>].dropna().unique()</span>
+<span id="cb35-103"><a href="#cb35-103" aria-hidden="true" tabindex="-1"></a>    val_label <span class="op">=</span> val_season[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(val_season) <span class="cf">else</span> <span class="st">"n/a"</span></span>
+<span id="cb35-104"><a href="#cb35-104" aria-hidden="true" tabindex="-1"></a>    test_label <span class="op">=</span> test_season[<span class="dv">0</span>] <span class="cf">if</span> <span class="bu">len</span>(test_season) <span class="cf">else</span> <span class="st">"n/a"</span></span>
+<span id="cb35-105"><a href="#cb35-105" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>label<span class="sc">}</span><span class="ss"> split: train seasons=</span><span class="sc">{</span><span class="bu">len</span>(<span class="bu">set</span>(df_train[<span class="st">'season'</span>]))<span class="sc">}</span><span class="ss">, val=</span><span class="sc">{</span>val_label<span class="sc">}</span><span class="ss">, test=</span><span class="sc">{</span>test_label<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb35-106"><a href="#cb35-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-107"><a href="#cb35-107" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> val_df, test_df, best_name, best_pipe, best_test_probs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="pre-match-experiment-results" class="level4">
 <h4 class="anchored" data-anchor-id="pre-match-experiment-results">Pre-match experiment results</h4>
-<div id="c046502d" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="98">
+<div id="c046502d" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="128">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>pre_train, pre_val, pre_test, train_seasons, val_season, test_season <span class="op">=</span> time_split(df_pre)</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>pre_cats, pre_nums <span class="op">=</span> build_feature_lists(df_pre)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>pre_val_df, pre_test_df, pre_best_name, pre_best_pipe, pre_best_test_probs <span class="op">=</span> run_experiment(</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    pre_train, pre_val, pre_test, pre_cats, pre_nums, label<span class="op">=</span><span class="st">"Pre-match"</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>display(pre_val_df)</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>display(pre_test_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>pre_train, pre_val, pre_test, train_seasons, val_season, test_season <span class="op">=</span> time_split(df_pre)</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>pre_cats, pre_nums <span class="op">=</span> build_feature_lists(df_pre)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>pre_val_df, pre_test_df, pre_best_name, pre_best_pipe, pre_best_test_probs <span class="op">=</span> run_experiment(</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>    pre_train, pre_val, pre_test, pre_cats, pre_nums, label<span class="op">=</span><span class="st">"Pre-match"</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>display(pre_val_df)</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>display(pre_test_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Pre-match split: train seasons=7, val=2022, test=2023</code></pre>
@@ -2757,33 +2951,33 @@ visualize distributions by surface, and summarize the key observations.</p>
 <h3 class="anchored" data-anchor-id="diagnostic-model-with-in-match-serve-stats">Diagnostic model with in-match serve stats</h3>
 <section id="diagnostic-feature-set" class="level4">
 <h4 class="anchored" data-anchor-id="diagnostic-feature-set">Diagnostic feature set</h4>
-<div id="c5c13eac" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="99">
+<div id="c5c13eac" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="129">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>serve_numeric <span class="op">=</span> [</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_1st_pct"</span>, <span class="st">"opponent_1st_pct"</span>, <span class="st">"1st_pct_diff"</span>,</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_1stWon_pct"</span>, <span class="st">"opponent_1stWon_pct"</span>, <span class="st">"1stWon_pct_diff"</span>,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_2ndWon_pct"</span>, <span class="st">"opponent_2ndWon_pct"</span>, <span class="st">"2ndWon_pct_diff"</span>,</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_df_per_game"</span>, <span class="st">"opponent_df_per_game"</span>, <span class="st">"df_per_game_diff"</span>,</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_bp_pct"</span>, <span class="st">"opponent_bp_pct"</span>, <span class="st">"bp_pct_diff"</span>,</span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>serve_numeric <span class="op">=</span> [</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_1st_pct"</span>, <span class="st">"opponent_1st_pct"</span>, <span class="st">"1st_pct_diff"</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_1stWon_pct"</span>, <span class="st">"opponent_1stWon_pct"</span>, <span class="st">"1stWon_pct_diff"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_2ndWon_pct"</span>, <span class="st">"opponent_2ndWon_pct"</span>, <span class="st">"2ndWon_pct_diff"</span>,</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_df_per_game"</span>, <span class="st">"opponent_df_per_game"</span>, <span class="st">"df_per_game_diff"</span>,</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"player_bp_pct"</span>, <span class="st">"opponent_bp_pct"</span>, <span class="st">"bp_pct_diff"</span>,</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
 <section id="diagnostic-results" class="level4">
 <h4 class="anchored" data-anchor-id="diagnostic-results">Diagnostic results</h4>
-<div id="5c38122f" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="100">
+<div id="5c38122f" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="130">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic experiment (uses in-match serve metrics)</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>diag_train, diag_val, diag_test, _, _, _ <span class="op">=</span> time_split(df_diag)</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>diag_cats, diag_nums <span class="op">=</span> build_feature_lists(df_diag, extra_numeric<span class="op">=</span>serve_numeric)</span>
-<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>diag_val_df, diag_test_df, diag_best_name, diag_best_pipe, diag_best_test_probs <span class="op">=</span> run_experiment(</span>
-<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>    diag_train, diag_val, diag_test, diag_cats, diag_nums, label<span class="op">=</span><span class="st">"Diagnostic"</span></span>
-<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>display(diag_val_df)</span>
-<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>display(diag_test_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Diagnostic experiment (uses in-match serve metrics)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>diag_train, diag_val, diag_test, _, _, _ <span class="op">=</span> time_split(df_diag)</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>diag_cats, diag_nums <span class="op">=</span> build_feature_lists(df_diag, extra_numeric<span class="op">=</span>serve_numeric)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>diag_val_df, diag_test_df, diag_best_name, diag_best_pipe, diag_best_test_probs <span class="op">=</span> run_experiment(</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    diag_train, diag_val, diag_test, diag_cats, diag_nums, label<span class="op">=</span><span class="st">"Diagnostic"</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>display(diag_val_df)</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>display(diag_test_df)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Diagnostic split: train seasons=7, val=2022, test=2023</code></pre>
@@ -2891,42 +3085,42 @@ visualize distributions by surface, and summarize the key observations.</p>
 <h3 class="anchored" data-anchor-id="calibration-and-error-analysis-pre-match-model">Calibration and error analysis (pre-match model)</h3>
 <section id="calibration-curve" class="level4">
 <h4 class="anchored" data-anchor-id="calibration-curve">Calibration curve</h4>
-<div id="2909a2de" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="101">
+<div id="2909a2de" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="131">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> pre_test.copy()</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> analysis.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> np.asarray(pre_best_test_probs)</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> probs.ndim <span class="op">!=</span> <span class="dv">1</span>:</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> probs.ravel()</span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(probs) <span class="op">!=</span> <span class="bu">len</span>(analysis):</span>
-<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Prediction length does not match test set length."</span>)</span>
-<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"pred_prob"</span>] <span class="op">=</span> pd.to_numeric(probs, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"won"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"won"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> analysis.dropna(subset<span class="op">=</span>[<span class="st">"pred_prob"</span>, <span class="st">"won"</span>])</span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"pred"</span>] <span class="op">=</span> (analysis[<span class="st">"pred_prob"</span>] <span class="op">&gt;=</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"error"</span>] <span class="op">=</span> (analysis[<span class="st">"pred"</span>] <span class="op">!=</span> analysis[<span class="st">"won"</span>]).astype(<span class="bu">int</span>)</span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calibration curve</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a>prob_true, prob_pred <span class="op">=</span> calibration_curve(analysis[<span class="st">"won"</span>], analysis[<span class="st">"pred_prob"</span>], n_bins<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a>plt.plot(prob_pred, prob_true, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"Model"</span>)</span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">"--"</span>, color<span class="op">=</span><span class="st">"gray"</span>, label<span class="op">=</span><span class="st">"Perfectly calibrated"</span>)</span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Calibration curve (</span><span class="sc">{</span>pre_best_name<span class="sc">}</span><span class="ss">)"</span>)</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted win probability"</span>)</span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observed win rate"</span>)</span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.calibration <span class="im">import</span> calibration_curve</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> pre_test.copy()</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> analysis.reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>probs <span class="op">=</span> np.asarray(pre_best_test_probs)</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> probs.ndim <span class="op">!=</span> <span class="dv">1</span>:</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    probs <span class="op">=</span> probs.ravel()</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">len</span>(probs) <span class="op">!=</span> <span class="bu">len</span>(analysis):</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">"Prediction length does not match test set length."</span>)</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"pred_prob"</span>] <span class="op">=</span> pd.to_numeric(probs, errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"won"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"won"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>analysis <span class="op">=</span> analysis.dropna(subset<span class="op">=</span>[<span class="st">"pred_prob"</span>, <span class="st">"won"</span>])</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"pred"</span>] <span class="op">=</span> (analysis[<span class="st">"pred_prob"</span>] <span class="op">&gt;=</span> <span class="fl">0.5</span>).astype(<span class="bu">int</span>)</span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>analysis[<span class="st">"error"</span>] <span class="op">=</span> (analysis[<span class="st">"pred"</span>] <span class="op">!=</span> analysis[<span class="st">"won"</span>]).astype(<span class="bu">int</span>)</span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Calibration curve</span></span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a>prob_true, prob_pred <span class="op">=</span> calibration_curve(analysis[<span class="st">"won"</span>], analysis[<span class="st">"pred_prob"</span>], n_bins<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">6</span>, <span class="dv">4</span>))</span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>plt.plot(prob_pred, prob_true, marker<span class="op">=</span><span class="st">"o"</span>, label<span class="op">=</span><span class="st">"Model"</span>)</span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>plt.plot([<span class="dv">0</span>, <span class="dv">1</span>], [<span class="dv">0</span>, <span class="dv">1</span>], <span class="st">"--"</span>, color<span class="op">=</span><span class="st">"gray"</span>, label<span class="op">=</span><span class="st">"Perfectly calibrated"</span>)</span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="ss">f"Calibration curve (</span><span class="sc">{</span>pre_best_name<span class="sc">}</span><span class="ss">)"</span>)</span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">"Predicted win probability"</span>)</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Observed win rate"</span>)</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb41-28"><a href="#cb41-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="hm_datasciende_files/figure-html/cell-27-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="hm_datasciende_files/figure-html/cell-30-output-1.png" class="img-fluid figure-img"></p>
 </figure>
 </div>
 </div>
@@ -2934,45 +3128,45 @@ visualize distributions by surface, and summarize the key observations.</p>
 </section>
 <section id="error-analysis-slices" class="level4">
 <h4 class="anchored" data-anchor-id="error-analysis-slices">Error analysis slices</h4>
-<div id="c63a70f0" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="102">
+<div id="c63a70f0" class="cell" data-tags="[&quot;hide-input&quot;]" data-execution_count="132">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by surface</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"surface"</span> <span class="kw">in</span> analysis.columns:</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    error_by_surface <span class="op">=</span> (</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"surface"</span>)[<span class="st">"error"</span>]</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    display(error_by_surface)</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by rank gap</span></span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"rank_diff"</span> <span class="kw">in</span> analysis.columns:</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_diff"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"rank_diff"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_gap"</span>] <span class="op">=</span> analysis[<span class="st">"rank_diff"</span>].<span class="bu">abs</span>()</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>    bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">500</span>, np.inf]</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">"0-25"</span>, <span class="st">"25-50"</span>, <span class="st">"50-100"</span>, <span class="st">"100-200"</span>, <span class="st">"200-500"</span>, <span class="st">"500+"</span>]</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_gap_bin"</span>] <span class="op">=</span> pd.cut(analysis[<span class="st">"rank_gap"</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels, include_lowest<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    error_by_rank_gap <span class="op">=</span> (</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"rank_gap_bin"</span>, observed<span class="op">=</span><span class="va">False</span>)[<span class="st">"error"</span>]</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    display(error_by_rank_gap)</span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by match duration</span></span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"minutes"</span> <span class="kw">in</span> analysis.columns:</span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"minutes"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes"</span>] <span class="op">=</span> analysis[<span class="st">"minutes"</span>].clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>    bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="dv">150</span>, <span class="dv">200</span>, np.inf]</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">"0-60"</span>, <span class="st">"60-90"</span>, <span class="st">"90-120"</span>, <span class="st">"120-150"</span>, <span class="st">"150-200"</span>, <span class="st">"200+"</span>]</span>
-<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes_bin"</span>] <span class="op">=</span> pd.cut(analysis[<span class="st">"minutes"</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels, include_lowest<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>    error_by_minutes <span class="op">=</span> (</span>
-<span id="cb39-32"><a href="#cb39-32" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"minutes_bin"</span>, observed<span class="op">=</span><span class="va">False</span>)[<span class="st">"error"</span>]</span>
-<span id="cb39-33"><a href="#cb39-33" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
-<span id="cb39-34"><a href="#cb39-34" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
-<span id="cb39-35"><a href="#cb39-35" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb39-36"><a href="#cb39-36" aria-hidden="true" tabindex="-1"></a>    display(error_by_minutes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by surface</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"surface"</span> <span class="kw">in</span> analysis.columns:</span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>    error_by_surface <span class="op">=</span> (</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"surface"</span>)[<span class="st">"error"</span>]</span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    display(error_by_surface)</span>
+<span id="cb42-9"><a href="#cb42-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-10"><a href="#cb42-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by rank gap</span></span>
+<span id="cb42-11"><a href="#cb42-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"rank_diff"</span> <span class="kw">in</span> analysis.columns:</span>
+<span id="cb42-12"><a href="#cb42-12" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_diff"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"rank_diff"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb42-13"><a href="#cb42-13" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_gap"</span>] <span class="op">=</span> analysis[<span class="st">"rank_diff"</span>].<span class="bu">abs</span>()</span>
+<span id="cb42-14"><a href="#cb42-14" aria-hidden="true" tabindex="-1"></a>    bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">50</span>, <span class="dv">100</span>, <span class="dv">200</span>, <span class="dv">500</span>, np.inf]</span>
+<span id="cb42-15"><a href="#cb42-15" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">"0-25"</span>, <span class="st">"25-50"</span>, <span class="st">"50-100"</span>, <span class="st">"100-200"</span>, <span class="st">"200-500"</span>, <span class="st">"500+"</span>]</span>
+<span id="cb42-16"><a href="#cb42-16" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"rank_gap_bin"</span>] <span class="op">=</span> pd.cut(analysis[<span class="st">"rank_gap"</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels, include_lowest<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-17"><a href="#cb42-17" aria-hidden="true" tabindex="-1"></a>    error_by_rank_gap <span class="op">=</span> (</span>
+<span id="cb42-18"><a href="#cb42-18" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"rank_gap_bin"</span>, observed<span class="op">=</span><span class="va">False</span>)[<span class="st">"error"</span>]</span>
+<span id="cb42-19"><a href="#cb42-19" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
+<span id="cb42-20"><a href="#cb42-20" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb42-21"><a href="#cb42-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-22"><a href="#cb42-22" aria-hidden="true" tabindex="-1"></a>    display(error_by_rank_gap)</span>
+<span id="cb42-23"><a href="#cb42-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-24"><a href="#cb42-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Error analysis by match duration</span></span>
+<span id="cb42-25"><a href="#cb42-25" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"minutes"</span> <span class="kw">in</span> analysis.columns:</span>
+<span id="cb42-26"><a href="#cb42-26" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes"</span>] <span class="op">=</span> pd.to_numeric(analysis[<span class="st">"minutes"</span>], errors<span class="op">=</span><span class="st">"coerce"</span>)</span>
+<span id="cb42-27"><a href="#cb42-27" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes"</span>] <span class="op">=</span> analysis[<span class="st">"minutes"</span>].clip(lower<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb42-28"><a href="#cb42-28" aria-hidden="true" tabindex="-1"></a>    bins <span class="op">=</span> [<span class="dv">0</span>, <span class="dv">60</span>, <span class="dv">90</span>, <span class="dv">120</span>, <span class="dv">150</span>, <span class="dv">200</span>, np.inf]</span>
+<span id="cb42-29"><a href="#cb42-29" aria-hidden="true" tabindex="-1"></a>    labels <span class="op">=</span> [<span class="st">"0-60"</span>, <span class="st">"60-90"</span>, <span class="st">"90-120"</span>, <span class="st">"120-150"</span>, <span class="st">"150-200"</span>, <span class="st">"200+"</span>]</span>
+<span id="cb42-30"><a href="#cb42-30" aria-hidden="true" tabindex="-1"></a>    analysis[<span class="st">"minutes_bin"</span>] <span class="op">=</span> pd.cut(analysis[<span class="st">"minutes"</span>], bins<span class="op">=</span>bins, labels<span class="op">=</span>labels, include_lowest<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb42-31"><a href="#cb42-31" aria-hidden="true" tabindex="-1"></a>    error_by_minutes <span class="op">=</span> (</span>
+<span id="cb42-32"><a href="#cb42-32" aria-hidden="true" tabindex="-1"></a>        analysis.groupby(<span class="st">"minutes_bin"</span>, observed<span class="op">=</span><span class="va">False</span>)[<span class="st">"error"</span>]</span>
+<span id="cb42-33"><a href="#cb42-33" aria-hidden="true" tabindex="-1"></a>        .agg([<span class="st">"mean"</span>, <span class="st">"count"</span>])</span>
+<span id="cb42-34"><a href="#cb42-34" aria-hidden="true" tabindex="-1"></a>        .sort_values(<span class="st">"mean"</span>, ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb42-35"><a href="#cb42-35" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb42-36"><a href="#cb42-36" aria-hidden="true" tabindex="-1"></a>    display(error_by_minutes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -3135,6 +3329,7 @@ visualize distributions by surface, and summarize the key observations.</p>
 <section id="ml-conclusions" class="level3">
 <h3 class="anchored" data-anchor-id="ml-conclusions">ML conclusions</h3>
 <ul>
+<li>The target is balanced (wins vs losses ~50/50), so accuracy is interpretable; ROC-AUC and log loss remain the main metrics for ranking and calibration.</li>
 <li>Pre-match models achieve moderate discrimination (ROC-AUC ~0.70), showing that pre-match features explain part of outcomes.</li>
 <li>Diagnostic models using in-match serve stats are much stronger (ROC-AUC ~0.98), confirming that serve performance largely explains outcomes but is not available pre-match.</li>
 <li>Errors cluster in close-rank matches (rank gap 0-25) and very long matches (200+ minutes), with grass the hardest surface in this analysis.</li>
